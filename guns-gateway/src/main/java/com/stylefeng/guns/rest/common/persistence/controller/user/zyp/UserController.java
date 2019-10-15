@@ -28,11 +28,12 @@ public class UserController {
 
     @RequestMapping("getUserInfo")
     public UserBaseVo getUserInfo(HttpServletRequest request) {
-        int UUID = 2;
+//        int UUID = 2;
         String authToken = request.getHeader(jwtProperties.getHeader()).substring(7);
         String userId = jedis.get(authToken);
+        Integer integer = Integer.valueOf(userId);
 //        String usernameFromToken = jwtTokenUtil.getUsernameFromToken(token);
-        UserBaseVo userInfo = userService.getUserInfo(UUID);
+        UserBaseVo userInfo = userService.getUserInfo(integer);
         return userInfo;
     }
     @RequestMapping("check")

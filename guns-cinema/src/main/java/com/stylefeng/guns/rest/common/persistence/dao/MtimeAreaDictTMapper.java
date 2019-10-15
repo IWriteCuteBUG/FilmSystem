@@ -2,6 +2,10 @@ package com.stylefeng.guns.rest.common.persistence.dao;
 
 import com.stylefeng.guns.rest.common.persistence.model.MtimeAreaDictT;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.stylefeng.guns.rest.common.persistence.vo.dhd.Area;
+import com.stylefeng.guns.rest.vo.dhd.AreaVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +16,5 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * @since 2019-10-12
  */
 public interface MtimeAreaDictTMapper extends BaseMapper<MtimeAreaDictT> {
-
+    List<Area> selectAllArea();
 }

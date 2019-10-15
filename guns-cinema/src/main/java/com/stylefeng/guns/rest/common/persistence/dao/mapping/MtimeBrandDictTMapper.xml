@@ -7,5 +7,8 @@
         <id column="UUID" property="uuid" />
         <result column="show_name" property="showName" />
     </resultMap>
+    <select id="selectAllBrand" resultType="com.stylefeng.guns.rest.common.persistence.vo.dhd.Brand">
+        select UUID,show_name from mtime_brand_dict_t
+    </select>
 
 </mapper>

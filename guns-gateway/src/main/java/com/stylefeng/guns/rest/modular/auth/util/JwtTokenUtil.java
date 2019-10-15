@@ -118,6 +118,7 @@ public class JwtTokenUtil {
     /**
      * 生成token
      */
+//                                     md5Key  randomKey             userName
     private String doGenerateToken(Map<String, Object> claims, String subject) {
         final Date createdDate = new Date();
         final Date expirationDate = new Date(createdDate.getTime() + jwtProperties.getExpiration() * 1000);

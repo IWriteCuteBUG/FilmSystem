@@ -30,8 +30,12 @@ public class AuthUserController {
 //        int UUID = 2;
         String authToken = request.getHeader(jwtProperties.getHeader()).substring(7);
         String userId = jedis.get(authToken);
-        Integer integer = Integer.valueOf(userId);
+
 //        String usernameFromToken = jwtTokenUtil.getUsernameFromToken(token);
+        if (userId == null) {
+            return UserBaseVo.err("用户尚未登录");
+        }
+        Integer integer = Integer.valueOf(userId);
         UserBaseVo userInfo = userService.getUserInfo(integer);
         return userInfo;
     }

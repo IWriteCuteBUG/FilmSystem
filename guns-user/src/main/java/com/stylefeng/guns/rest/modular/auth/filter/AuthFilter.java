@@ -35,7 +35,8 @@ public class AuthFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-        if (request.getServletPath().equals("/" + jwtProperties.getAuthPath())) {
+        String[] ignoreUrls = jwtProperties.getIgnoreUrl().split(",");
+        if (AuthFilter.isInIgnoreUrls(ignoreUrls, request.getServletPath())) {
             chain.doFilter(request, response);
             return;
         }
@@ -43,7 +44,6 @@ public class AuthFilter extends OncePerRequestFilter {
         String authToken = null;
         if (requestHeader != null && requestHeader.startsWith("Bearer ")) {
             authToken = requestHeader.substring(7);
-
             //验证token是否过期,包含了验证jwt是否正确
             try {
                 boolean flag = jwtTokenUtil.isTokenExpired(authToken);
@@ -62,5 +62,14 @@ public class AuthFilter extends OncePerRequestFilter {
             return;
         }
         chain.doFilter(request, response);
+    }
+
+    public static boolean isInIgnoreUrls(String[] ignoreUrls, String reqUrl){
+        for (String url : ignoreUrls) {
+            if(reqUrl.equals(url)){
+                return true;
+            }
+        }
+        return false;
     }
 }

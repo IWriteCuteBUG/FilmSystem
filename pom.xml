@@ -48,6 +48,7 @@
         <!--<mysql-connector-java.version>5.1.47</mysql-connector-java.version>-->
         <jwt.version>0.9.0</jwt.version>
         <hutool.version>4.1.1</hutool.version>
+        <jedis.version>2.8.2</jedis.version>
     </properties>
 
     <dependencyManagement>
@@ -171,6 +172,7 @@
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 

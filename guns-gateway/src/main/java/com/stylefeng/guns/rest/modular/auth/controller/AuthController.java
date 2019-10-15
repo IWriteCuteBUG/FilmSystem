@@ -49,7 +49,7 @@ public class AuthController {
     Jedis jedis;
 
     @RequestMapping(value = "${jwt.auth-path}")
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthRequest authRequest) {
+    public ResponseEntity<?> createAuthenticationToken(AuthRequest authRequest) {
         ReqAuthVo reqAuthVo = new ReqAuthVo();
         BeanUtils.copyProperties(authRequest, reqAuthVo);
 //        boolean validate = reqValidator.validate(authRequest);

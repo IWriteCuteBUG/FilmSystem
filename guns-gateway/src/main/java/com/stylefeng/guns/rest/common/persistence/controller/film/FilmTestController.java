@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class FilmTestController {
-    @Reference(interfaceClass = FilmTestService.class)
+    @Reference(interfaceClass = FilmTestService.class, check = false)
     FilmTestService filmTestService;
 
     @RequestMapping("/test/film")

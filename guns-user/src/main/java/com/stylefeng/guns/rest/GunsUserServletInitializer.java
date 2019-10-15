@@ -15,5 +15,4 @@ public class GunsUserServletInitializer extends SpringBootServletInitializer {
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
         return builder.sources(GunsUserApplication.class);
     }
-
 }

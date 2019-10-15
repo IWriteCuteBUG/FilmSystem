@@ -1,12 +1,11 @@
 package com.stylefeng.guns.rest.common.persistence.userserviceimpl.zyp;
 
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.stylefeng.guns.rest.common.persistence.dao.MtimeUserTMapper;
 import com.stylefeng.guns.rest.common.persistence.model.MtimeUserT;
-import com.stylefeng.guns.rest.userservice.zyp.UserService;
+import com.stylefeng.guns.rest.userservice.zyp.AuthUserService;
 import com.stylefeng.guns.rest.vo.zyp.RespUserInfoVo;
 import com.stylefeng.guns.rest.vo.zyp.UserBaseVo;
 import com.stylefeng.guns.rest.vo.zyp.UserCheckBaseVo;
@@ -15,8 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-@Service(interfaceClass = UserService.class)
-public class UserServiceImpl implements UserService {
+@Service(interfaceClass = AuthUserService.class)
+public class AuthUserServiceImpl implements AuthUserService {
     @Autowired
     MtimeUserTMapper mtimeUserTMapper;
 

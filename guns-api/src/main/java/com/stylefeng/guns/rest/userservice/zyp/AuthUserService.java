@@ -3,7 +3,7 @@ package com.stylefeng.guns.rest.userservice.zyp;
 import com.stylefeng.guns.rest.vo.zyp.UserBaseVo;
 import com.stylefeng.guns.rest.vo.zyp.UserCheckBaseVo;
 
-public interface UserService {
+public interface AuthUserService {
 
     UserBaseVo getUserInfo(int uuid);
 

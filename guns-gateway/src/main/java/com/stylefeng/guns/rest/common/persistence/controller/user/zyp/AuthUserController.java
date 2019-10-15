@@ -1,10 +1,9 @@
 package com.stylefeng.guns.rest.common.persistence.controller.user.zyp;
 
-import com.alibaba.druid.support.json.JSONUtils;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.stylefeng.guns.rest.config.properties.JwtProperties;
 import com.stylefeng.guns.rest.modular.auth.util.JwtTokenUtil;
-import com.stylefeng.guns.rest.userservice.zyp.UserService;
+import com.stylefeng.guns.rest.userservice.zyp.AuthUserService;
 import com.stylefeng.guns.rest.vo.zyp.UserBaseVo;
 import com.stylefeng.guns.rest.vo.zyp.UserCheckBaseVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("user")
-public class UserController {
-    @Reference(interfaceClass = UserService.class)
-    UserService userService;
+public class AuthUserController {
+    @Reference(interfaceClass = AuthUserService.class)
+    AuthUserService userService;
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
     @Autowired

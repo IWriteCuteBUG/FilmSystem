@@ -1,8 +1,8 @@
 package com.stylefeng.guns.rest.common.persistence.controller.user.zyp;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.stylefeng.guns.rest.common.utils.zyp.GetUserIdUtils;
 import com.stylefeng.guns.rest.config.properties.JwtProperties;
-import com.stylefeng.guns.rest.modular.auth.util.JwtTokenUtil;
 import com.stylefeng.guns.rest.userservice.zyp.AuthUserService;
 import com.stylefeng.guns.rest.vo.zyp.UserBaseVo;
 import com.stylefeng.guns.rest.vo.zyp.UserCheckBaseVo;
@@ -19,22 +19,17 @@ public class AuthUserController {
     @Reference(interfaceClass = AuthUserService.class)
     AuthUserService userService;
     @Autowired
-    private JwtTokenUtil jwtTokenUtil;
-    @Autowired
-    private JwtProperties jwtProperties;
-    @Autowired
     Jedis jedis;
+    @Autowired
+    JwtProperties jwtProperties;
 
     @RequestMapping("getUserInfo")
     public UserBaseVo getUserInfo(HttpServletRequest request) {
 //        int UUID = 2;
-        String authToken = request.getHeader(jwtProperties.getHeader()).substring(7);
-        String userId = jedis.get(authToken);
+        Integer userId = GetUserIdUtils.getUserId(request,jedis,jwtProperties);
+//        Integer userId = new GetUserIdUtils().getUserId(request);
 
 //        String usernameFromToken = jwtTokenUtil.getUsernameFromToken(token);
-        if (userId == null) {
-            return UserBaseVo.err("用户尚未登录");
-        }
         Integer integer = Integer.valueOf(userId);
         UserBaseVo userInfo = userService.getUserInfo(integer);
         return userInfo;

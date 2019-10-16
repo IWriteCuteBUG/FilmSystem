@@ -19,9 +19,9 @@ public class OrderCinemaServiceImpl implements OrderCinemaService {
     @Override
     public String QueryFieldTimeByFieldId(int FieldId) {
         MtimeFieldT mtimeFieldT = new MtimeFieldT();
-        mtimeFieldT.setFilmId(FieldId);
+        mtimeFieldT.setUuid(FieldId);
         MtimeFieldT mtimeFieldT1 = mtimeFieldTMapper.selectOne(mtimeFieldT);
-        String beginTime = mtimeFieldT.getBeginTime();
+        String beginTime = mtimeFieldT1.getBeginTime();
         return beginTime;
     }
 

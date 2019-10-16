@@ -21,8 +21,8 @@ public class OrderInfoController {
 
     @RequestMapping("getOrderInfo")
     public OrderInfoBaseVo orderInfo(HttpServletRequest request, OrderInfoVo orderInfoVo) {
-//        Integer userId = getUserIdUtils.getUserId(request);
-        int userId = 1;
+        Integer userId = getUserIdUtils.getUserId(request);
+//        int userId = 1;
         OrderInfoBaseVo orderInfoBaseVo = orderInfoService.queryOrderInfoByUserId(userId, orderInfoVo);
         return orderInfoBaseVo;
     }

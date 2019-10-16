@@ -18,16 +18,19 @@ import javax.servlet.http.HttpServletRequest;
 public class AuthUserController {
     @Reference(interfaceClass = AuthUserService.class,check = false)
     AuthUserService userService;
+
     @Autowired
+    private GetUserIdUtils getUserIdUtils;
+    /*@Autowired
     Jedis jedis;
     @Autowired
-    JwtProperties jwtProperties;
+    JwtProperties jwtProperties;*/
 
     @RequestMapping("getUserInfo")
     public UserBaseVo getUserInfo(HttpServletRequest request) {
 //        int UUID = 2;
-        Integer userId = GetUserIdUtils.getUserId(request,jedis,jwtProperties);
-//        Integer userId = new GetUserIdUtils().getUserId(request);
+//        Integer userId = GetUserIdUtils.getUserId(request,jedis,jwtProperties);
+        Integer userId = getUserIdUtils.getUserId(request);
 
 //        String usernameFromToken = jwtTokenUtil.getUsernameFromToken(token);
         Integer integer = Integer.valueOf(userId);

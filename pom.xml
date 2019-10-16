@@ -18,6 +18,8 @@
         <module>guns-cinema</module>
         <module>guns-gateway</module>
         <module>guns-api</module>
+        <module>guns-order</module>
+        <module>guns-alipay</module>
     </modules>
 
     <parent>

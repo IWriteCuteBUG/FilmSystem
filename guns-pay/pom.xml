@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.stylefeng.guns</groupId>
-    <artifactId>guns-alipay</artifactId>
+    <artifactId>guns-pay</artifactId>
     <version>0.0.1</version>
     <packaging>jar</packaging>
 
-    <name>guns-alipay</name>
-    <description>guns ALIPAY服务器</description>
+    <name>guns-pay</name>
+    <description>guns 支付服务器</description>
 
     <parent>
         <groupId>com.stylefeng</groupId>
@@ -41,7 +41,6 @@
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>
-
         <dependency>
             <groupId>com.stylefeng.guns</groupId>
             <artifactId>guns-api</artifactId>

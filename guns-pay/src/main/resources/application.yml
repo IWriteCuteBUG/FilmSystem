@@ -28,7 +28,7 @@ mybatis-plus:
 
 spring:
   application:
-    name: guns-alipayservice
+    name: guns-payservice
   dubbo:
     protocol:
       name: dubbo
@@ -46,4 +46,4 @@ logging:
   level.root: info
   level.com.stylefeng: debug
   path: logs/
-  file: guns-rest.log
+  file: guns-pay.log

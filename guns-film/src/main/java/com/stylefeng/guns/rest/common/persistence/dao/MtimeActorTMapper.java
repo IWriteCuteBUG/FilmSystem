@@ -1,6 +1,5 @@
 package com.stylefeng.guns.rest.common.persistence.dao;
 
-import com.stylefeng.guns.rest.common.persistence.model.MtimeActorT;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 
 /**
@@ -11,6 +10,6 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * @author jeff
  * @since 2019-10-12
  */
-public interface MtimeActorTMapper extends BaseMapper<MtimeActorT> {
+public interface MtimeActorTMapper extends BaseMapper<MtimeActorTMapper> {
 
 }

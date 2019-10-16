@@ -1,7 +1,10 @@
 package com.stylefeng.guns.rest.common.persistence.dao;
 
-import com.stylefeng.guns.rest.common.persistence.model.MtimeBannerT;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.stylefeng.guns.rest.filmservice.ljw.vo.ljw.model.MtimeBannerT;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * <p>

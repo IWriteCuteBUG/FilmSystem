@@ -1,4 +1,4 @@
-package com.stylefeng.guns.rest.common.persistence.model;
+package com.stylefeng.guns.rest.filmservice.ljw.vo.ljw.model;
 
 import com.baomidou.mybatisplus.enums.IdType;
 import com.baomidou.mybatisplus.annotations.TableId;
@@ -9,14 +9,14 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 类型信息表
+ * 区域信息表
  * </p>
  *
  * @author jeff
  * @since 2019-10-12
  */
-@TableName("mtime_cat_dict_t")
-public class MtimeCatDictT extends Model<MtimeCatDictT> {
+@TableName("mtime_source_dict_t")
+public class MtimeSourceDictT extends Model<MtimeSourceDictT> {
 
     private static final long serialVersionUID = 1L;
 
@@ -55,7 +55,7 @@ public class MtimeCatDictT extends Model<MtimeCatDictT> {
 
     @Override
     public String toString() {
-        return "MtimeCatDictT{" +
+        return "MtimeSourceDictT{" +
         "uuid=" + uuid +
         ", showName=" + showName +
         "}";

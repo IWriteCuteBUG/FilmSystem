@@ -10,20 +10,33 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
+@RequestMapping("film")
 public class ClyFilmController {
     @Reference(interfaceClass = ClyFilmService.class,check = false)
-    ClyFilmService clyFilmService;
+     ClyFilmService clyFilmService;
 
-    @RequestMapping("film/getConditionList")
-    public ClyBaseVo<ClyFilmConditionVo> queryFilmCondition(Integer catId, Integer sourecId, Integer yearId){
-        ClyFilmConditionVo filmConditionVo = clyFilmService.queryFilmCondition(catId, sourecId, yearId);
+    /**
+     * 影片条件列表查询
+     * @param catId
+     * @param sourceId
+     * @param yearId
+     * @return
+     */
+    @RequestMapping("getConditionList")
+    public ClyBaseVo<ClyFilmConditionVo> queryFilmCondition(Integer catId, Integer sourceId, Integer yearId){
+        ClyFilmConditionVo filmConditionVo = clyFilmService.queryFilmCondition(catId, sourceId, yearId);
         ClyBaseVo<ClyFilmConditionVo> clyBaseVo = new ClyBaseVo<>();
         clyBaseVo.setData(filmConditionVo);
         clyBaseVo.setStatus(0);
         return clyBaseVo;
     }
 
-    @RequestMapping("film/getFilms")
+    /**
+     * 影片查询
+     * @param filmCondition
+     * @return
+     */
+    @RequestMapping("getFilms")
     public ClyBaseVo getFilms(GetFilmCondition filmCondition){
         ClyBaseVo clyBaseVo = clyFilmService.getFilms(filmCondition);
         return clyBaseVo;

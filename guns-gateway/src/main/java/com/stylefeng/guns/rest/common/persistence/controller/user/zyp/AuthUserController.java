@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("user")
 public class AuthUserController {
-    @Reference(interfaceClass = AuthUserService.class)
+    @Reference(interfaceClass = AuthUserService.class,check = false)
     AuthUserService userService;
     @Autowired
     Jedis jedis;

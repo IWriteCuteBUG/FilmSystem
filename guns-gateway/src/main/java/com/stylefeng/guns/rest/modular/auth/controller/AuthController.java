@@ -39,7 +39,7 @@ public class AuthController {
     @Resource(name = "simpleValidator")
     private IReqValidator reqValidator;
 
-    @Reference(interfaceClass = AuthService.class)
+    @Reference(interfaceClass = AuthService.class, check = false)
     AuthService authService;
 
     @Autowired

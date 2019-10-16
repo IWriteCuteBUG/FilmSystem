@@ -3,6 +3,8 @@ package com.stylefeng.guns.rest.modular.film.cly;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.stylefeng.guns.core.exception.GunsException;
+import com.stylefeng.guns.rest.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.rest.common.persistence.dao.MtimeCatDictTMapper;
 import com.stylefeng.guns.rest.common.persistence.dao.MtimeFilmTMapper;
 import com.stylefeng.guns.rest.common.persistence.dao.MtimeSourceDictTMapper;
@@ -37,7 +39,10 @@ public class ClyFilmServiceImpl implements ClyFilmService {
     MtimeFilmTMapper filmTMapper;
 
     @Override
-    public ClyFilmConditionVo queryFilmCondition(Integer catId, Integer sourecId, Integer yearId) {
+    public ClyFilmConditionVo queryFilmCondition(Integer catId, Integer sourceId, Integer yearId) {
+        if(catId == null || sourceId == null || yearId == null){
+            throw new GunsException(BizExceptionEnum.QUERY_CONDITION_ERROR);
+        }
         EntityWrapper<MtimeCatDictT> mtimeCatDictTEntityWrapper = new EntityWrapper<>();
         mtimeCatDictTEntityWrapper.isNotNull("UUID");
         List<MtimeCatDictT> catDictTList = catDictTMapper.selectList(mtimeCatDictTEntityWrapper);

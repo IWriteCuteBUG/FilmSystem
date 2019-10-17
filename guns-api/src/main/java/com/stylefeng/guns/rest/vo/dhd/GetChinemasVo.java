@@ -9,6 +9,15 @@ public class GetChinemasVo implements Serializable {
     List<BrandVo> brandList;
     List<HallTypeVo> halltypeList;
     int status;
+    String msg;
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 
     public List<AreaVo> getAreaList() {
         return areaList;
@@ -49,6 +58,7 @@ public class GetChinemasVo implements Serializable {
                 ", brandList=" + brandList +
                 ", halltypeList=" + halltypeList +
                 ", status=" + status +
+                ", msg='" + msg + '\'' +
                 '}';
     }
 }

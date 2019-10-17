@@ -17,14 +17,21 @@ public class GetConditionController  {
     GetConditionService getConditionService;
     @RequestMapping("/cinema/getCondition")
     public GetChinemasVo getChinemasVoInfo(int brandId, int hallType, int areaId){
-        List<AreaVo> areaVos = getConditionService.queryAreaList(areaId);
-        List<BrandVo> brandVos = getConditionService.brandList(brandId);
-        List<HallTypeVo> hallTypeVos = getConditionService.hallList(hallType);
-        GetChinemasVo getChinemasVo = new GetChinemasVo();
-        getChinemasVo.setAreaList(areaVos);
-        getChinemasVo.setBrandList(brandVos);
-        getChinemasVo.setHalltypeList(hallTypeVos);
-        getChinemasVo.setStatus(0);
+        GetChinemasVo getChinemasVo = null;
+        try {
+            List<AreaVo> areaVos = getConditionService.queryAreaList(areaId);
+            List<BrandVo> brandVos = getConditionService.brandList(brandId);
+            List<HallTypeVo> hallTypeVos = getConditionService.hallList(hallType);
+            getChinemasVo = new GetChinemasVo();
+            getChinemasVo.setAreaList(areaVos);
+            getChinemasVo.setBrandList(brandVos);
+            getChinemasVo.setHalltypeList(hallTypeVos);
+            getChinemasVo.setStatus(0);
+        } catch (Exception e) {
+            getChinemasVo.setStatus(1);
+            getChinemasVo.setMsg("影院信息查询失败");
+            return getChinemasVo;
+        }
         return getChinemasVo;
 
     }

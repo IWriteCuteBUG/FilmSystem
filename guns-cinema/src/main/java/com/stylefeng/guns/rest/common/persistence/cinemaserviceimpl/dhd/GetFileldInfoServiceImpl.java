@@ -2,12 +2,12 @@ package com.stylefeng.guns.rest.common.persistence.cinemaserviceimpl.dhd;
 
 import com.alibaba.dubbo.config.annotation.Service;
 
+import com.stylefeng.guns.rest.cinemabean.MtimeCinemaT;
 import com.stylefeng.guns.rest.cinemaservice.dhd.dhd.GetFieldInfoService;
 import com.stylefeng.guns.rest.common.persistence.dao.MtimeCinemaTMapper;
 import com.stylefeng.guns.rest.common.persistence.dao.MtimeFieldTMapper;
 import com.stylefeng.guns.rest.common.persistence.dao.MtimeHallDictTMapper;
 import com.stylefeng.guns.rest.common.persistence.dao.MtimeHallFilmInfoTMapper;
-import com.stylefeng.guns.rest.common.persistence.model.MtimeCinemaT;
 import com.stylefeng.guns.rest.common.persistence.model.MtimeFieldT;
 import com.stylefeng.guns.rest.common.persistence.model.MtimeHallDictT;
 import com.stylefeng.guns.rest.common.persistence.model.MtimeHallFilmInfoT;

@@ -7,6 +7,7 @@ import com.stylefeng.guns.rest.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.rest.config.properties.JwtProperties;
 import com.stylefeng.guns.rest.modular.auth.controller.dto.AuthRequest;
 import com.stylefeng.guns.rest.modular.auth.controller.dto.AuthResponse;
+import com.stylefeng.guns.rest.modular.auth.model.AuthBasesVo;
 import com.stylefeng.guns.rest.modular.auth.util.JwtTokenUtil;
 import com.stylefeng.guns.rest.modular.auth.validator.IReqValidator;
 import com.stylefeng.guns.rest.userservice.zyp.AuthService;
@@ -49,7 +50,7 @@ public class AuthController {
     Jedis jedis;
 
     @RequestMapping(value = "${jwt.auth-path}")
-    public ResponseEntity<?> createAuthenticationToken(AuthRequest authRequest) {
+    public AuthBasesVo createAuthenticationToken(AuthRequest authRequest) {
         ReqAuthVo reqAuthVo = new ReqAuthVo();
         BeanUtils.copyProperties(authRequest, reqAuthVo);
 //        boolean validate = reqValidator.validate(authRequest);
@@ -64,7 +65,8 @@ public class AuthController {
             final String token = jwtTokenUtil.generateToken(userName, randomKey);
             jedis.set(token,userId+"");
             jedis.expire(token, 3600);
-            return ResponseEntity.ok(new AuthResponse(token, randomKey));
+            AuthResponse body = new AuthResponse(token, randomKey);
+            return AuthBasesVo.ok(body);
         } else {
             throw new GunsException(BizExceptionEnum.AUTH_REQUEST_ERROR);
         }

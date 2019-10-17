@@ -29,7 +29,7 @@
     </select>
 
     <update id="updateUserInfo">
-        update mtime_user_t set nick_name = #{vo.nickname}, email = #{vo.email},user_phone = #{vo.phone},
+        update mtime_user_t set user_name=#{vo.username},head_url=#{vo.headAddress},nick_name = #{vo.nickname}, email = #{vo.email},user_phone = #{vo.phone},
         user_sex = #{vo.sex}, birthday = #{vo.birthday},life_state = #{vo.lifeState}, biography = #{vo.biography},
         address = #{vo.address}, update_time = #{vo.updateTime} where UUID = #{vo.uuid}
     </update>

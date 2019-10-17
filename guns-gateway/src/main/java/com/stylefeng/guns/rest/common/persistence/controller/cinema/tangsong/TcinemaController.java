@@ -14,10 +14,10 @@ public class TcinemaController {
     CinemasService cinemasService;
 
     @RequestMapping("/cinema/getCinemas")
-    public CinemaVos getCinemas(Integer brandId,Integer districtId,Integer hallType,Integer pageSize,Integer nowPage) {
+    public CinemaVos getCinemas(Integer brandId,Integer hallType,Integer areaId,Integer pageSize,Integer nowPage) {
         CinemaVos cinemaVos;
         try {
-           cinemaVos = cinemasService.getCinemas(brandId,districtId,hallType,pageSize, nowPage);
+           cinemaVos = cinemasService.getCinemas(brandId,areaId,hallType,pageSize, nowPage);
         }catch (RuntimeException e) {
             return new CinemaVos(1,"影院信息查询失败");
         }

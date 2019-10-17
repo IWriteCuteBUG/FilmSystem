@@ -4,40 +4,40 @@ import java.io.Serializable;
 
 public class FiledInfoVo implements Serializable {
     private static final long serialVersionUID = 1087705716870937126L;
-    CinemaInfoVo cinemaInfoVo;
-    FilmInfoVo filmInfoVo;
-    HallInfoVo hallInfoVo;
+    CinemaInfoVo cinemaInfo;
+    FilmInfoVo filmInfo;
+    HallInfoVo hallInfo;
 
-    public CinemaInfoVo getCinemaInfoVo() {
-        return cinemaInfoVo;
+    public CinemaInfoVo getCinemaInfo() {
+        return cinemaInfo;
     }
 
-    public void setCinemaInfoVo(CinemaInfoVo cinemaInfoVo) {
-        this.cinemaInfoVo = cinemaInfoVo;
+    public void setCinemaInfo(CinemaInfoVo cinemaInfo) {
+        this.cinemaInfo = cinemaInfo;
     }
 
-    public FilmInfoVo getFilmInfoVo() {
-        return filmInfoVo;
+    public FilmInfoVo getFilmInfo() {
+        return filmInfo;
     }
 
-    public void setFilmInfoVo(FilmInfoVo filmInfoVo) {
-        this.filmInfoVo = filmInfoVo;
+    public void setFilmInfo(FilmInfoVo filmInfo) {
+        this.filmInfo = filmInfo;
     }
 
-    public HallInfoVo getHallInfoVo() {
-        return hallInfoVo;
+    public HallInfoVo getHallInfo() {
+        return hallInfo;
     }
 
-    public void setHallInfoVo(HallInfoVo hallInfoVo) {
-        this.hallInfoVo = hallInfoVo;
+    public void setHallInfo(HallInfoVo hallInfo) {
+        this.hallInfo = hallInfo;
     }
 
     @Override
     public String toString() {
         return "FiledInfoVo{" +
-                "cinemaInfoVo=" + cinemaInfoVo +
-                ", filmInfoVo=" + filmInfoVo +
-                ", hallInfoVo=" + hallInfoVo +
+                "cinemaInfo=" + cinemaInfo +
+                ", filmInfo=" + filmInfo +
+                ", hallInfo=" + hallInfo +
                 '}';
     }
 }

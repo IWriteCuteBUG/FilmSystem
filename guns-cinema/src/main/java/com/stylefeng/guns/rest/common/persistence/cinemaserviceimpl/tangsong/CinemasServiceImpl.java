@@ -24,7 +24,7 @@ public class CinemasServiceImpl implements CinemasService {
     MtimeCinemaTMapper mtimeCinemaTMapper;
 
     @Override
-    public CinemaVos getCinemas(Integer brandId,Integer districtId,Integer hallType,Integer pageSize,Integer nowPage) {
+    public CinemaVos getCinemas(Integer brandId,Integer hallType,Integer areaId,Integer pageSize,Integer nowPage) {
         Page<MtimeCinemaT> page = new Page<>();
         page.setSize(pageSize);
         page.setCurrent(nowPage);
@@ -34,8 +34,8 @@ public class CinemasServiceImpl implements CinemasService {
         if (brandId != 99) {
             mtimeCinemaTEntityWrapper.eq("brand_id",brandId);
         }
-        if (districtId != 99) {
-            mtimeCinemaTEntityWrapper.eq("area_id", districtId);
+        if (areaId != 99) {
+            mtimeCinemaTEntityWrapper.eq("area_id", areaId);
         }
         if (hallType != 99) {
             mtimeCinemaTEntityWrapper.like("hall_ids", String.valueOf(hallType));
@@ -51,6 +51,7 @@ public class CinemasServiceImpl implements CinemasService {
         }else {
             total = mtimeCinemaTS.size()/pageSize;
         }
+        listCinemaVos.setImgPre("http://img.meetingshop.cn/");
         listCinemaVos.setTotalPage(total);
         listCinemaVos.setStatus(0);
         return listCinemaVos;

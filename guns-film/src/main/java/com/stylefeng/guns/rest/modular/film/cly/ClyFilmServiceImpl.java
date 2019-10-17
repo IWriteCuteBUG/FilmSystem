@@ -93,6 +93,7 @@ public class ClyFilmServiceImpl implements ClyFilmService {
         clyBaseVo.setStatus(0);
         clyBaseVo.setNowPage(filmCondition.getNowPage().toString());
         clyBaseVo.setTotalPage(pages.toString());
+        clyBaseVo.setImgPre("http://img.meetingshop.cn/");
         return clyBaseVo;
     }
 

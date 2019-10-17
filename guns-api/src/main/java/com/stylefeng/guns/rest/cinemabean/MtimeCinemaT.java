@@ -1,4 +1,4 @@
-package com.stylefeng.guns.rest.common.persistence.model;
+package com.stylefeng.guns.rest.cinemabean;
 
 import com.baomidou.mybatisplus.enums.IdType;
 import com.baomidou.mybatisplus.annotations.TableId;

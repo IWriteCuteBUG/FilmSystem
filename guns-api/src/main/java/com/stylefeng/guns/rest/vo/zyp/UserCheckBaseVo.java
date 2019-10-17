@@ -19,7 +19,7 @@ public class UserCheckBaseVo implements Serializable {
 
     public static UserCheckBaseVo err() {
         UserCheckBaseVo userCheckBaseVo = new UserCheckBaseVo();
-        userCheckBaseVo.setStatus(2);
+        userCheckBaseVo.setStatus(1);
         userCheckBaseVo.setMsg("用户已注册");
         return userCheckBaseVo;
     }

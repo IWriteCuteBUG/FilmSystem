@@ -28,6 +28,9 @@ public class UserServiceImpl implements UserService {
         if (usernameList.contains(username)){
             return 0;
         } else {
+            vo.setBirthday("这个是保密的");
+            vo.setBiography("赶紧来设置签名吧");
+            vo.setLifeState(0);
             userMapper.addUser(vo);
             return 1;
         }

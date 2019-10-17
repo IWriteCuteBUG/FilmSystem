@@ -58,11 +58,8 @@ public class UserController {
         if(count == 1){
             return new BaseResVoSJB(0, null, "注册成功");
         }
-        if(count == 0){
-            return new BaseResVoSJB(1, null, "用户名已存在");
-        } else {
-            return new BaseResVoSJB(999, null, "系统出现异常，请联系管理员");
-        }
+
+        return new BaseResVoSJB(999, null, "系统出现异常，请联系管理员");
     }
 
     @RequestMapping("updateUserInfo")
@@ -91,7 +88,7 @@ public class UserController {
             return new BaseResVoSJB(0, null, "成功退出");
         }
         if(count == 0){
-            return new BaseResVoSJB(1, null, "退出失败，用户尚未登陆");
+            return new BaseResVoSJB(700, null, "退出失败，用户尚未登陆");
         }
         return new BaseResVoSJB(999, null, "系统出现异常，请联系管理员");
     }

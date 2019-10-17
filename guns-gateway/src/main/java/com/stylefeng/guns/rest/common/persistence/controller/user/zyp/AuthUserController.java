@@ -33,9 +33,8 @@ public class AuthUserController {
         return userInfo;
     }
     @RequestMapping("check")
-    public UserCheckBaseVo check(HttpServletRequest request) {
-        String name = (String) request.getSession().getAttribute("userName");
-        UserCheckBaseVo userCheckBaseVo = userService.check(name);
+    public UserCheckBaseVo check(String username) {
+        UserCheckBaseVo userCheckBaseVo = userService.check(username);
         return userCheckBaseVo;
     }
 }

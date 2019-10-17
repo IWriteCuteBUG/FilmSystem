@@ -12,4 +12,7 @@ public class RegReqVo implements Serializable {
     private String email;
     private String mobile;
     private String address;
+    private String biography;
+    private Integer lifeState;
+    private String birthday;
 }

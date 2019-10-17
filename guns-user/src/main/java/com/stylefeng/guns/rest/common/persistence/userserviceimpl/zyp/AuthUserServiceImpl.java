@@ -46,7 +46,7 @@ public class AuthUserServiceImpl implements AuthUserService {
         Wrapper<MtimeUserT> mtimeUserTWrapper = new EntityWrapper<>();
         mtimeUserTWrapper.eq("user_name", name);
         Integer integer = mtimeUserTMapper.selectCount(mtimeUserTWrapper);
-        if (integer == null) {
+        if (integer == null || integer == 0) {
             return UserCheckBaseVo.ok();
         } else if (integer >= 1) {
             return UserCheckBaseVo.err();

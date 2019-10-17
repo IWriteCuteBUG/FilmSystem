@@ -17,7 +17,7 @@ import java.io.Serializable;
  * @since 2019-10-12
  */
 @TableName("mtime_user_t")
-public class MtimeUserT extends Model<MtimeUserT> {
+public class MtimeUserT extends Model<MtimeUserT>{
 
     private static final long serialVersionUID = 1L;
 

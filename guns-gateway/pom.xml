@@ -59,11 +59,18 @@
             <artifactId>zkclient</artifactId>
             <version>0.10</version>
         </dependency>
+<<<<<<< HEAD
 
         <dependency>
             <groupId>com.stylefeng.guns</groupId>
             <artifactId>guns-api</artifactId>
             <version>0.0.1</version>
+=======
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>2.8.2</version>
+>>>>>>> dccff476f132b059a692f042eed541edb9406d44
         </dependency>
     </dependencies>
 

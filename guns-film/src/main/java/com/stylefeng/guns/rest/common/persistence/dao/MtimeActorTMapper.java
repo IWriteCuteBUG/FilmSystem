@@ -12,5 +12,4 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * @since 2019-10-12
  */
 public interface MtimeActorTMapper extends BaseMapper<MtimeActorT> {
-
 }

@@ -1,0 +1,7 @@
+网关模块(guns_gateway):tomcat 80
+用户模块(guns_user)：tomcat 8080,dubbo 20880
+影院模块(guns_cinema)：tomcat 8081,dubbo 20881
+电影模块(guns_film)：tomcat 8082,dubbo 20882
+接口模块(guns_api):不占用端口号
+订单模块：tomcat8083 dubbo 20883
+支付模块 tomcat 8084 dubbo 20884

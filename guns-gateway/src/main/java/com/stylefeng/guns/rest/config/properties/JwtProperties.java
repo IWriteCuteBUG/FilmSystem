@@ -19,7 +19,9 @@ public class JwtProperties {
 
     private String secret = "defaultSecret";
 
-    private Long expiration = 604800L;
+    private Long expiration = 3600L;
+
+    private String ignoreUrl;
 
     private String authPath = "auth";
 
@@ -67,5 +69,13 @@ public class JwtProperties {
 
     public void setMd5Key(String md5Key) {
         this.md5Key = md5Key;
+    }
+
+    public String getIgnoreUrl() {
+        return ignoreUrl;
+    }
+
+    public void setIgnoreUrl(String ignoreUrl) {
+        this.ignoreUrl = ignoreUrl;
     }
 }

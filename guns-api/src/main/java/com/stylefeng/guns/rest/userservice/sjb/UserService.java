@@ -12,4 +12,10 @@ public interface UserService {
     UserWithoutPwd selectUserWithoutPwdByUuid(int uuid);
 
     String queryPwdByUsername(String userName);
+
+    Integer queryUsernameCount(String username);
+
+    Integer queryEmailCount(String email);
+
+    Integer queryPhoneCount(String mobile);
 }

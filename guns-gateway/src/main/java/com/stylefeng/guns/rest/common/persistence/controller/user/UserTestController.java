@@ -1,4 +1,4 @@
-package com.stylefeng.guns.rest.common.persistence.controller.user;
+/*package com.stylefeng.guns.rest.common.persistence.controller.user;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.stylefeng.guns.rest.userservice.UserTestService;
@@ -15,4 +15,4 @@ public class UserTestController {
         String nameById = userService.getNameById(2);
         return nameById;
     }
-}
+}*/

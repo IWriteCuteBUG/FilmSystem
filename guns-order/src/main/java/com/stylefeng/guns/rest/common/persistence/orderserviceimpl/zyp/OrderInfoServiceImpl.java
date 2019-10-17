@@ -18,7 +18,10 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -33,7 +36,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
     @Reference(interfaceClass = OrderCinemaService.class,check = false)
     OrderCinemaService orderCinemaService;
     @Override
-    public OrderInfoBaseVo queryOrderInfoByUserId(int userId, OrderInfoVo orderInfoVo) {
+    public OrderInfoBaseVo queryOrderInfoByUserId(int userId, OrderInfoVo orderInfoVo) throws ParseException {
         Page<MoocOrderT> page = new Page<>();
         page.setSize(orderInfoVo.getPageSize());
         page.setCurrent(orderInfoVo.getNowPage());
@@ -57,7 +60,17 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 //            放映时间
             Integer fieldId = moocOrderT.getFieldId();
             String fieldTime = orderCinemaService.QueryFieldTimeByFieldId(fieldId);
+            /*SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            Date parse = simpleDateFormat.parse(fieldTime);*/
             respOrderInfo.setFieldTime(fieldTime);
+//            下单时间
+//            转换为时间戳
+            Date orderTime = moocOrderT.getOrderTime();
+            long time = orderTime.getTime() / 1000;
+//            时间戳转回的方法
+//            Date date = new Date(time);
+//            respOrderInfo.setOrderTimestamp(time+"");
+            respOrderInfo.setOrderTimestamp(time);
 //            影院名称
             Integer cinemaId = moocOrderT.getCinemaId();
             String cinemaName = orderCinemaService.QueryFieldCinemaNameByCinemaId(cinemaId);

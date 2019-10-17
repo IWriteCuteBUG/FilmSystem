@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
 
 @RestController
 @RequestMapping("order")
@@ -20,7 +21,7 @@ public class OrderInfoController {
     OrderInfoService orderInfoService;
 
     @RequestMapping("getOrderInfo")
-    public OrderInfoBaseVo orderInfo(HttpServletRequest request, OrderInfoVo orderInfoVo) {
+    public OrderInfoBaseVo orderInfo(HttpServletRequest request, OrderInfoVo orderInfoVo) throws ParseException {
         Integer userId = getUserIdUtils.getUserId(request);
 //        int userId = 1;
         OrderInfoBaseVo orderInfoBaseVo = orderInfoService.queryOrderInfoByUserId(userId, orderInfoVo);

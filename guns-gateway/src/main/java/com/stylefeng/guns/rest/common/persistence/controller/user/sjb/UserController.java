@@ -31,7 +31,7 @@ public class UserController {
     UserService userService;
 
     @RequestMapping("register")
-    public BaseResVoSJB register(@RequestBody RegReqVo vo){
+    public BaseResVoSJB register(RegReqVo vo){
         String username = vo.getUsername();
         String password = vo.getPassword();
         String encryptPwd = MD5Util.encrypt(password);
@@ -40,6 +40,18 @@ public class UserController {
            password == null ||
            ("".equals(password.trim()))){
             return new BaseResVoSJB(2, null, "用户名和密码不能为空，请重新输入");
+        }
+        Integer usernameCount = userService.queryUsernameCount(vo.getUsername());
+        if (usernameCount != 0) {
+            return new BaseResVoSJB(2, null, "用户名已存在");
+        }
+        Integer phoneCount = userService.queryPhoneCount(vo.getMobile());
+        if (phoneCount != 0) {
+            return new BaseResVoSJB(2, null, "一个手机号只能绑定一个账号");
+        }
+        Integer emailCount =  userService.queryEmailCount(vo.getEmail());
+        if (emailCount != 0) {
+            return new BaseResVoSJB(2, null, "一个邮箱只能绑定一个账号");
         }
         vo.setPassword(encryptPwd);
         int count = userService.addUser(vo);
@@ -54,7 +66,7 @@ public class UserController {
     }
 
     @RequestMapping("updateUserInfo")
-    public BaseResVoSJB updateUserInfo(@RequestBody UpdateUserInfoReqVo vo){
+    public BaseResVoSJB updateUserInfo(UpdateUserInfoReqVo vo){
         int uuid = vo.getUuid();
         int count = 0;
         if(uuid != 0){

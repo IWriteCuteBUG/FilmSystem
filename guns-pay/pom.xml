@@ -32,10 +32,10 @@
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>com.stylefeng</groupId>
             <artifactId>guns-core</artifactId>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>

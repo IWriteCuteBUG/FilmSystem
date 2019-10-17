@@ -21,15 +21,10 @@ public class AuthUserController {
 
     @Autowired
     private GetUserIdUtils getUserIdUtils;
-    /*@Autowired
-    Jedis jedis;
-    @Autowired
-    JwtProperties jwtProperties;*/
 
     @RequestMapping("getUserInfo")
     public UserBaseVo getUserInfo(HttpServletRequest request) {
 //        int UUID = 2;
-//        Integer userId = GetUserIdUtils.getUserId(request,jedis,jwtProperties);
         Integer userId = getUserIdUtils.getUserId(request);
 
 //        String usernameFromToken = jwtTokenUtil.getUsernameFromToken(token);

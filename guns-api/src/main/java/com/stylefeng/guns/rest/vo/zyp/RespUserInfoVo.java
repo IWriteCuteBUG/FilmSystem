@@ -15,7 +15,7 @@ public class RespUserInfoVo implements Serializable {
     String phone;
     int sex;
     String birthday;
-    int lifeState;
+    Integer lifeState;
     String biography;
     String address;
     String headAddress;

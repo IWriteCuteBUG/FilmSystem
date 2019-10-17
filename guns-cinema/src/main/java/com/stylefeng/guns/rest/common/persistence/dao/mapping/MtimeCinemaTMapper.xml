@@ -3,7 +3,7 @@
 <mapper namespace="com.stylefeng.guns.rest.common.persistence.dao.MtimeCinemaTMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.stylefeng.guns.rest.common.persistence.model.MtimeCinemaT">
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.rest.cinemabean.MtimeCinemaT">
         <id column="UUID" property="uuid" />
         <result column="cinema_name" property="cinemaName" />
         <result column="cinema_phone" property="cinemaPhone" />
@@ -14,5 +14,37 @@
         <result column="cinema_address" property="cinemaAddress" />
         <result column="minimum_price" property="minimumPrice" />
     </resultMap>
+    <select id="queryCinemaInfoById" parameterType="int" resultType="com.stylefeng.guns.rest.cinemabean.MtimeCinema">
+        select cinema_address as cinemaAddress,
+        UUID as cinemaId,
+        cinema_name as cinemaName,
+        cinema_phone as cinemaPhone,
+        img_address as imgUrl
+        from mtime_cinema_t where UUID = #{cinemaId}
+    </select>
+
+    <resultMap id="queryFilmInfosByCinemaIdMap" type="com.stylefeng.guns.rest.cinemaservice.tangsong.tvo.CinemaAndFilmsInfoVo">
+        <result column="actors" property="actors"/>
+        <result column="filmCats" property="filmCats"/>
+        <result column="filmId" property="filmId"/>
+        <result column="filmLength" property="filmLength"/>
+        <result column="filmType" property="filmType"/>
+        <result column="imgAddress" property="imgAddress"/>
+        <result column="filmName" property="filmName"/>
+        <collection  property="filmFields" ofType="com.stylefeng.guns.rest.cinemaservice.tangsong.tvo.FilmsFields">
+            <result column="beginTime" property="beginTime"/>
+            <result column="endTime" property="endTime"/>
+            <result column="fieldId" property="fieldId"/>
+            <result column="hallName" property="hallName"/>
+            <result column="language" property="language"/>
+            <result column="price" property="price"/>
+        </collection>
+    </resultMap>
+    <select id="queryFilmInfosByCinemaId" parameterType="int" resultMap="queryFilmInfosByCinemaIdMap">
+        SELECT h.film_name as filmName,h.actors,h.film_cats as filmCats,fi.UUID as fieldId,fi.begin_time as beginTime,fi.end_time as endTime,fi.hall_name as hallName,fi.price as price,h.film_language as language,fi.film_id as filmId,h.film_length as filmLength,h.film_language as filmType,h.img_address as imgAddress
+FROM `mtime_cinema_t` c
+LEFT JOIN mtime_field_t fi on c.UUID = fi.cinema_id
+LEFT JOIN mtime_hall_film_info_t h on fi.film_id = h.film_id WHERE c.UUID = #{cinemaId}
+    </select>
 
 </mapper>

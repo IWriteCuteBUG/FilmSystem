@@ -8,9 +8,29 @@ package com.stylefeng.guns.core.base.tips;
  */
 public class ErrorTip extends Tip {
 
+    private Integer status;
     public ErrorTip(int code, String message) {
         super();
         this.code = code;
         this.message = message;
+    }
+    public ErrorTip(int code, String message, Integer status) {
+        super();
+        this.code = code;
+        this.message = message;
+        this.status = status;
+    }
+    public ErrorTip(String message, Integer status) {
+        super();
+        this.message = message;
+        this.status = status;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

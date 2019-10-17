@@ -1,7 +1,12 @@
 package com.stylefeng.guns.rest.common.persistence.dao;
 
-import com.stylefeng.guns.rest.common.persistence.model.MtimeCinemaT;
+import com.stylefeng.guns.rest.cinemabean.MtimeCinema;
+import com.stylefeng.guns.rest.cinemabean.MtimeCinemaT;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.stylefeng.guns.rest.cinemaservice.tangsong.tvo.CinemaAndFilmsInfoVo;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +18,7 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  */
 public interface MtimeCinemaTMapper extends BaseMapper<MtimeCinemaT> {
 
+    List<MtimeCinema> queryCinemaInfoById(@Param("cinemaId") int cinemaId);
+
+    List<CinemaAndFilmsInfoVo> queryFilmInfosByCinemaId(@Param("cinemaId") int cinemaId);
 }

@@ -1,10 +1,11 @@
-package com.stylefeng.guns.rest.common.persistence.model;
+package com.stylefeng.guns.rest.vo.sjb;
 
-import com.baomidou.mybatisplus.enums.IdType;
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.enums.IdType;
+
 import java.io.Serializable;
 
 /**
@@ -16,7 +17,7 @@ import java.io.Serializable;
  * @since 2019-10-12
  */
 @TableName("mtime_cinema_t")
-public class MtimeCinemaT extends Model<MtimeCinemaT> {
+public class MtimeCinemaTVo extends Model<MtimeCinemaTVo> {
 
     private static final long serialVersionUID = 1L;
 

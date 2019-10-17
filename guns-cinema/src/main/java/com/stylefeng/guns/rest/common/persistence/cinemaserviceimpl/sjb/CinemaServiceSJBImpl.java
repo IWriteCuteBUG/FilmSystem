@@ -1,10 +1,10 @@
 package com.stylefeng.guns.rest.common.persistence.cinemaserviceimpl.sjb;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.stylefeng.guns.rest.cinemabean.MtimeCinemaT;
 import com.stylefeng.guns.rest.cinemaservice.sjb.CinemaServiceSJB;
 import com.stylefeng.guns.rest.common.persistence.dao.MtimeCinemaTMapper;
 import com.stylefeng.guns.rest.common.persistence.dao.MtimeHallDictTMapper;
-import com.stylefeng.guns.rest.common.persistence.model.MtimeCinemaT;
 import com.stylefeng.guns.rest.common.persistence.model.MtimeHallDictT;
 import com.stylefeng.guns.rest.vo.sjb.MtimeCinemaTVo;
 import com.stylefeng.guns.rest.vo.sjb.SeatObject;

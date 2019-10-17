@@ -8,5 +8,11 @@
         <result column="show_name" property="showName" />
         <result column="seat_address" property="seatAddress" />
     </resultMap>
+    <select id="selectAllHand" resultType="com.stylefeng.guns.rest.common.persistence.vo.dhd.Hall">
+        select UUID,show_name,seat_address from mtime_hall_dict_t
+    </select>
+    <select id="selectByHallId" resultType="com.stylefeng.guns.rest.common.persistence.model.MtimeHallDictT">
+        select UUID,show_name as showName,seat_address from  mtime_hall_dict_t where UUID = #{hallId}
+    </select>
 
 </mapper>

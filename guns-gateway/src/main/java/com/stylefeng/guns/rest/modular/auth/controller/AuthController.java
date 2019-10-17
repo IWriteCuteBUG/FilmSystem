@@ -69,7 +69,7 @@ public class AuthController {
             AuthResponse body = new AuthResponse(token, randomKey);
             return AuthBasesVo.ok(body);
         } else {
-            throw new GunsException(1,"用户名或密码错误");
+            return AuthBasesVo.err();
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.stylefeng.guns.rest.common.persistence.controller.film;
+/*package com.stylefeng.guns.rest.common.persistence.controller.film;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.stylefeng.guns.rest.filmservice.FilmTestService;
@@ -16,4 +16,4 @@ public class FilmTestController {
         String actorNameById = filmTestService.getActorNameById(9);
         return actorNameById;
     }
-}
+}*/

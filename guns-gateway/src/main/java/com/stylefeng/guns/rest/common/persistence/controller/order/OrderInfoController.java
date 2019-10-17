@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.text.ParseException;
 
 @RestController
 @RequestMapping("order")
@@ -51,7 +52,7 @@ public class OrderInfoController {
     Jedis jedis;
 
     @RequestMapping("getOrderInfo")
-    public OrderInfoBaseVo orderInfo(HttpServletRequest request, OrderInfoVo orderInfoVo) {
+    public OrderInfoBaseVo orderInfo(HttpServletRequest request, OrderInfoVo orderInfoVo) throws ParseException {
         Integer userId = getUserIdUtils.getUserId(request);
 //        int userId = 1;
         OrderInfoBaseVo orderInfoBaseVo = orderInfoService.queryOrderInfoByUserId(userId, orderInfoVo);

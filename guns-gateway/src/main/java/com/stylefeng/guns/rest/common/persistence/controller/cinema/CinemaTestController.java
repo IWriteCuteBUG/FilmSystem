@@ -1,4 +1,4 @@
-package com.stylefeng.guns.rest.common.persistence.controller.cinema;
+/*package com.stylefeng.guns.rest.common.persistence.controller.cinema;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.stylefeng.guns.rest.cinemaservice.CinemaTestService;
@@ -16,4 +16,4 @@ public class CinemaTestController {
         String s = cinemaTestService.queryCinemaNameById(4);
         return s;
     }
-}
+}*/

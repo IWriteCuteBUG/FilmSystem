@@ -1,7 +1,9 @@
 package com.stylefeng.guns.rest.common.persistence.userserviceimpl.sjb;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.stylefeng.guns.rest.common.persistence.dao.MtimeUserTMapper;
+import com.stylefeng.guns.rest.common.persistence.model.MtimeUserT;
 import com.stylefeng.guns.rest.userservice.sjb.UserService;
 import com.stylefeng.guns.rest.vo.sjb.RegReqVo;
 import com.stylefeng.guns.rest.vo.sjb.UpdateUserInfoReqVo;
@@ -45,5 +47,29 @@ public class UserServiceImpl implements UserService {
     @Override
     public String queryPwdByUsername(String userName) {
         return userMapper.queryPwdByUsername(userName);
+    }
+
+    @Override
+    public Integer queryUsernameCount(String username) {
+        EntityWrapper<MtimeUserT> wrapper = new EntityWrapper<>();
+        wrapper.eq("user_name", username);
+        Integer integer = userMapper.selectCount(wrapper);
+        return integer;
+    }
+
+    @Override
+    public Integer queryEmailCount(String email) {
+        EntityWrapper<MtimeUserT> wrapper = new EntityWrapper<>();
+        wrapper.eq("email", email);
+        Integer integer = userMapper.selectCount(wrapper);
+        return integer;
+    }
+
+    @Override
+    public Integer queryPhoneCount(String mobile) {
+        EntityWrapper<MtimeUserT> wrapper = new EntityWrapper<>();
+        wrapper.eq("user_phone", mobile);
+        Integer integer = userMapper.selectCount(wrapper);
+        return integer;
     }
 }

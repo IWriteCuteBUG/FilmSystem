@@ -26,10 +26,18 @@ public class AuthUserServiceImpl implements AuthUserService {
         respUserInfoVo.setUsername(mtimeUserT.getUserName());
         respUserInfoVo.setNickname(mtimeUserT.getNickName());
         respUserInfoVo.setPhone(mtimeUserT.getUserPhone());
-        respUserInfoVo.setSex(mtimeUserT.getUserSex());
+        Integer userSex = mtimeUserT.getUserSex();
+        if (userSex == null) {
+            userSex = 0;
+        }
+        respUserInfoVo.setSex(userSex);
         respUserInfoVo.setHeadAddress(mtimeUserT.getHeadUrl());
         respUserInfoVo.setCreateTime(mtimeUserT.getBeginTime());
         BeanUtils.copyProperties(mtimeUserT,respUserInfoVo);
+        Integer lifeState = mtimeUserT.getLifeState();
+        if (lifeState == null) {
+            mtimeUserT.setLifeState(0);
+        }
         return UserBaseVo.ok(respUserInfoVo);
     }
 

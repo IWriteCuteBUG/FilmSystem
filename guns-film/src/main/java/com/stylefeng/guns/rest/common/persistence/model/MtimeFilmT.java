@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 
 /**
@@ -79,6 +81,7 @@ public class MtimeFilmT extends Model<MtimeFilmT> {
     /**
      * 影片上映时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @TableField("film_time")
     private Date filmTime;
     /**

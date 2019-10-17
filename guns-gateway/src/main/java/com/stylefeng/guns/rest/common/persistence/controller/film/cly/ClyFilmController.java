@@ -5,6 +5,8 @@ import com.stylefeng.guns.rest.filmservice.cly.ClyFilmService;
 import com.stylefeng.guns.rest.vo.cly.ClyBaseVo;
 import com.stylefeng.guns.rest.vo.cly.clyreqvo.GetFilmCondition;
 import com.stylefeng.guns.rest.vo.cly.clyresvo.ClyFilmConditionVo;
+import com.stylefeng.guns.rest.vo.cly.clyresvo.ClyFilmDetail;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,4 +43,15 @@ public class ClyFilmController {
         ClyBaseVo clyBaseVo = clyFilmService.getFilms(filmCondition);
         return clyBaseVo;
     }
+
+    @RequestMapping("films/{param}")
+    public ClyBaseVo detailOfFilm(@PathVariable("param") String param, Integer searchType){
+        ClyFilmDetail filmDetail = clyFilmService.queryFilmDetail(param, searchType);
+        ClyBaseVo<Object> clyBaseVo = new ClyBaseVo<>();
+        clyBaseVo.setStatus(0);
+        clyBaseVo.setData(filmDetail);
+        clyBaseVo.setImgPre("http://img.meetingshop.cn/");
+        return clyBaseVo;
+    }
+
 }

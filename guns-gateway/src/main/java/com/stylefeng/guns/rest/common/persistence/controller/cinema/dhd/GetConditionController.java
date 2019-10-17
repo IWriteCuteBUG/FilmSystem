@@ -2,10 +2,7 @@ package com.stylefeng.guns.rest.common.persistence.controller.cinema.dhd;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.stylefeng.guns.rest.cinemaservice.dhd.dhd.GetConditionService;
-import com.stylefeng.guns.rest.vo.dhd.AreaVo;
-import com.stylefeng.guns.rest.vo.dhd.BrandVo;
-import com.stylefeng.guns.rest.vo.dhd.GetChinemasVo;
-import com.stylefeng.guns.rest.vo.dhd.HallTypeVo;
+import com.stylefeng.guns.rest.vo.dhd.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,14 +15,16 @@ public class GetConditionController  {
     @RequestMapping("/cinema/getCondition")
     public GetChinemasVo getChinemasVoInfo(int brandId, int hallType, int areaId){
         GetChinemasVo getChinemasVo = null;
+        GetConditionControllerDateVo getConditionControllerDateVo = new GetConditionControllerDateVo();
         try {
             List<AreaVo> areaVos = getConditionService.queryAreaList(areaId);
             List<BrandVo> brandVos = getConditionService.brandList(brandId);
             List<HallTypeVo> hallTypeVos = getConditionService.hallList(hallType);
             getChinemasVo = new GetChinemasVo();
-            getChinemasVo.setAreaList(areaVos);
-            getChinemasVo.setBrandList(brandVos);
-            getChinemasVo.setHalltypeList(hallTypeVos);
+            getConditionControllerDateVo.setAreaList(areaVos);
+            getConditionControllerDateVo.setBrandList(brandVos);
+            getConditionControllerDateVo.setHalltypeList(hallTypeVos);
+            getChinemasVo.setData(getConditionControllerDateVo);
             getChinemasVo.setStatus(0);
         } catch (Exception e) {
             getChinemasVo.setStatus(1);

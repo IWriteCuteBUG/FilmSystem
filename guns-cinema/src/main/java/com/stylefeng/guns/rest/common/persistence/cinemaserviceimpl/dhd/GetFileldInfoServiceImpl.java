@@ -1,5 +1,6 @@
 package com.stylefeng.guns.rest.common.persistence.cinemaserviceimpl.dhd;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 
 import com.stylefeng.guns.rest.cinemabean.MtimeCinemaT;
@@ -11,11 +12,12 @@ import com.stylefeng.guns.rest.common.persistence.dao.MtimeHallFilmInfoTMapper;
 import com.stylefeng.guns.rest.common.persistence.model.MtimeFieldT;
 import com.stylefeng.guns.rest.common.persistence.model.MtimeHallDictT;
 import com.stylefeng.guns.rest.common.persistence.model.MtimeHallFilmInfoT;
+import com.stylefeng.guns.rest.orderservice.sjb.OrderServiceSJB;
 import com.stylefeng.guns.rest.vo.dhd.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Service(interfaceClass = GetFieldInfoService.class)
+@Service(interfaceClass = GetFieldInfoService.class )
 @Component
 public class GetFileldInfoServiceImpl implements GetFieldInfoService {
     @Autowired
@@ -26,6 +28,8 @@ public class GetFileldInfoServiceImpl implements GetFieldInfoService {
     MtimeHallDictTMapper mtimeHallDictTMapper;
     @Autowired
     MtimeHallFilmInfoTMapper mtimeHallFilmInfoTMapper;
+    @Reference(interfaceClass = OrderServiceSJB.class,check = false)
+    OrderServiceSJB orderServiceSJB;
     @Override
     public GetFieldInfoVo queryFiled(GetFileldInfoIDVo getFileldInfoIDVo) {
         MtimeCinemaT mtimeCinemaT = mtimeCinemaTMapper.selectById(getFileldInfoIDVo.getCinemaId());
@@ -51,7 +55,9 @@ public class GetFileldInfoServiceImpl implements GetFieldInfoService {
         hallInfoVo.setHallName(mtimeFieldT.getHallName());
         hallInfoVo.setPrice(mtimeFieldT.getPrice());
         hallInfoVo.setSeatFile(mtimeHallDictT.getSeatAddress());
-        hallInfoVo.setSoldSeats("1,2,3,4,5,6,7");
+        String s = orderServiceSJB.querySoldSeatsByFieldId(getFileldInfoIDVo.getFieldId());
+        String substring = s.substring(0, s.length() - 1);
+        hallInfoVo.setSoldSeats(substring);
         filedInfoVo.setHallInfo(hallInfoVo);
 
         //field的查询并且放入filedInfo

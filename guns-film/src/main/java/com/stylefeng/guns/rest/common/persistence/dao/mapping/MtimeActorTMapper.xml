@@ -9,4 +9,10 @@
         <result column="actor_img" property="actorImg" />
     </resultMap>
 
+    <select id="selectActors" resultType="com.stylefeng.guns.rest.vo.cly.clyresvo.ClyActorVo">
+        select actor_name as directorName,actor_img as imgAddress,role_name as roleName from
+        mtime_film_actor_t f left join mtime_actor_t a on f.actor_id=a.UUID
+        where f.film_id=#{filmId}
+    </select>
+
 </mapper>

@@ -5,14 +5,8 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.stylefeng.guns.core.exception.GunsException;
 import com.stylefeng.guns.rest.common.exception.BizExceptionEnum;
-import com.stylefeng.guns.rest.common.persistence.dao.MtimeCatDictTMapper;
-import com.stylefeng.guns.rest.common.persistence.dao.MtimeFilmTMapper;
-import com.stylefeng.guns.rest.common.persistence.dao.MtimeSourceDictTMapper;
-import com.stylefeng.guns.rest.common.persistence.dao.MtimeYearDictTMapper;
-import com.stylefeng.guns.rest.common.persistence.model.MtimeCatDictT;
-import com.stylefeng.guns.rest.common.persistence.model.MtimeFilmT;
-import com.stylefeng.guns.rest.common.persistence.model.MtimeSourceDictT;
-import com.stylefeng.guns.rest.common.persistence.model.MtimeYearDictT;
+import com.stylefeng.guns.rest.common.persistence.dao.*;
+import com.stylefeng.guns.rest.common.persistence.model.*;
 import com.stylefeng.guns.rest.filmservice.cly.ClyFilmService;
 import com.stylefeng.guns.rest.vo.cly.ClyBaseVo;
 import com.stylefeng.guns.rest.vo.cly.clyreqvo.GetFilmCondition;
@@ -21,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Component
@@ -37,6 +32,15 @@ public class ClyFilmServiceImpl implements ClyFilmService {
 
     @Autowired
     MtimeFilmTMapper filmTMapper;
+
+    @Autowired
+    MtimeFilmInfoTMapper infoTMapper;
+
+    @Autowired
+    MtimeActorTMapper actorTMapper;
+
+    @Autowired
+    MtimeHallFilmInfoTMapper hallFilmInfoTMapper;
 
     @Override
     public ClyFilmConditionVo queryFilmCondition(Integer catId, Integer sourceId, Integer yearId) {
@@ -95,6 +99,94 @@ public class ClyFilmServiceImpl implements ClyFilmService {
         clyBaseVo.setTotalPage(pages.toString());
         clyBaseVo.setImgPre("http://img.meetingshop.cn/");
         return clyBaseVo;
+    }
+
+    @Override
+    public ClyFilmDetail queryFilmDetail(String param, Integer searchType) {
+        MtimeFilmInfoT filmInfoT = null;
+        MtimeFilmT filmT = null;
+        MtimeHallFilmInfoT hallFilmInfoT = null;
+        //film
+        if(searchType == 0){
+            Integer i = Integer.valueOf(param);
+            filmT = filmTMapper.selectById(i);
+        }else{
+            EntityWrapper<MtimeFilmT> wrapper = new EntityWrapper<>();
+            wrapper.eq("film_name", param);
+            List<MtimeFilmT> mtimeFilmTS = filmTMapper.selectList(wrapper);
+            for (MtimeFilmT t : mtimeFilmTS) {
+                filmT = t;
+            }
+        }
+        //film_info
+        Integer filmId = filmT.getUuid();
+        EntityWrapper<MtimeFilmInfoT> infoTEntityWrapper = new EntityWrapper<>();
+        infoTEntityWrapper.eq("film_id", filmId);
+        List<MtimeFilmInfoT> mtimeFilmInfoTS = infoTMapper.selectList(infoTEntityWrapper);
+        for (MtimeFilmInfoT infoT : mtimeFilmInfoTS) {
+            filmInfoT = infoT;
+        }
+        //actors
+        List<ClyActorVo> clyActorVos = actorTMapper.selectActors(filmId);
+        //hall_film_info
+        EntityWrapper<MtimeHallFilmInfoT> hallFilmInfoTEntityWrapper = new EntityWrapper<>();
+        hallFilmInfoTEntityWrapper.eq("film_id", filmId);
+        List<MtimeHallFilmInfoT> hallFilmInfoTS = hallFilmInfoTMapper.selectList(hallFilmInfoTEntityWrapper);
+        for (MtimeHallFilmInfoT t : hallFilmInfoTS) {
+            hallFilmInfoT = t;
+        }
+        //director
+        Integer directorId = filmInfoT.getDirectorId();
+        MtimeActorT director = actorTMapper.selectById(directorId);
+        //area
+        Integer filmArea = filmT.getFilmArea();
+        MtimeSourceDictT sourceDictT = sourceDictTMapper.selectById(filmArea);
+
+        ClyFilmDetail filmDetail = convert2ClyFilmDetail(filmT, filmInfoT, clyActorVos, hallFilmInfoT, director, sourceDictT);
+
+        return filmDetail;
+    }
+
+    private ClyFilmDetail convert2ClyFilmDetail(MtimeFilmT filmT, MtimeFilmInfoT filmInfoT, List<ClyActorVo> clyActorVos, MtimeHallFilmInfoT hallFilmInfoT, MtimeActorT director, MtimeSourceDictT sourceDictT) {
+        ClyFilmDetail filmDetail = new ClyFilmDetail();
+        ClyInfo04 info04 = new ClyInfo04();
+        ClyActorsForInfo04 actorsForInfo04 = new ClyActorsForInfo04();
+        ClyDirector clyDirector = new ClyDirector();
+        //director
+        clyDirector.setDirectorName(director.getActorName());
+        clyDirector.setImgAddress(director.getActorImg());
+        //ImgVo
+        HashMap<Object, Object> imgVo = new HashMap<>();
+        String infoTFilmImgs = filmInfoT.getFilmImgs();
+        String[] infoImgs = infoTFilmImgs.split(",");
+        int length = infoImgs.length;
+        if(length > 0){
+            imgVo.put("mainImg", infoImgs[0]);
+        }
+        for (int i = 1; i < 5 && i < length; i++) {
+            imgVo.put("img0" + i, infoImgs[i]);
+        }
+        //clyActorsForInfo04
+        actorsForInfo04.setActors(clyActorVos);
+        actorsForInfo04.setBiopgraphy(filmInfoT.getBiography());
+        actorsForInfo04.setFilmId(filmT.getUuid());
+        actorsForInfo04.setDirector(clyDirector);
+        //info04
+        info04.setActors(actorsForInfo04);
+        info04.setImgVO(imgVo);
+        //filmDetail
+        filmDetail.setFilmEnName(filmInfoT.getFilmEnName());
+        filmDetail.setFilmId(filmT.getUuid());
+        filmDetail.setFilmName(filmT.getFilmName());
+        filmDetail.setImgAddress(filmT.getImgAddress());
+        filmDetail.setInfo01(hallFilmInfoT.getFilmCats());
+        filmDetail.setInfo02(sourceDictT.getShowName() + "/" + filmInfoT.getFilmLength());
+        filmDetail.setInfo03(filmT.getFilmTime() + sourceDictT.getShowName() + "上映");
+        filmDetail.setInfo04(info04);
+        filmDetail.setScore(filmT.getFilmScore());
+        filmDetail.setScoreNum(filmInfoT.getFilmScoreNum().toString());
+        filmDetail.setTotalBox(filmT.getFilmBoxOffice());
+        return filmDetail;
     }
 
     private List<ClyFilm> convert2ClyFilmList(List<MtimeFilmT> mtimeFilmTS) {

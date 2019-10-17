@@ -51,6 +51,7 @@ public class CinemasServiceImpl implements CinemasService {
         }else {
             total = mtimeCinemaTS.size()/pageSize;
         }
+        listCinemaVos.setImgPre("http://img.meetingshop.cn/");
         listCinemaVos.setTotalPage(total);
         listCinemaVos.setStatus(0);
         return listCinemaVos;

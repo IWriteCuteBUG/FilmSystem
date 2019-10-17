@@ -12,9 +12,16 @@ public class GunsException extends RuntimeException {
 
     private String message;
 
+    private Integer status;
+
     public GunsException(ServiceExceptionEnum serviceExceptionEnum) {
         this.code = serviceExceptionEnum.getCode();
         this.message = serviceExceptionEnum.getMessage();
+    }
+
+    public GunsException(Integer status,String message) {
+        this.status = status;
+        this.message = message;
     }
 
     public Integer getCode() {
@@ -25,6 +32,14 @@ public class GunsException extends RuntimeException {
         this.code = code;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     @Override
     public String getMessage() {
         return message;
@@ -33,4 +48,5 @@ public class GunsException extends RuntimeException {
     public void setMessage(String message) {
         this.message = message;
     }
+
 }

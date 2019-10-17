@@ -61,25 +61,25 @@ public class AuthFilter extends OncePerRequestFilter {
             String userId = jedis.get(authToken);
 
             //验证token是否过期,包含了验证jwt是否正确
-            try {
+            /*try {*/
                 /*boolean flag = jwtTokenUtil.isTokenExpired(authToken);
                 if (flag) {
                     RenderUtil.renderJson(response, new ErrorTip(BizExceptionEnum.TOKEN_EXPIRED.getCode(), BizExceptionEnum.TOKEN_EXPIRED.getMessage()));
                     return;
                 }*/
                 if (userId == null) {
-                    RenderUtil.renderJson(response, new ErrorTip(BizExceptionEnum.TOKEN_EXPIRED.getCode(), BizExceptionEnum.TOKEN_EXPIRED.getMessage()));
+                    RenderUtil.renderJson(response, new ErrorTip(BizExceptionEnum.TOKEN_EXPIRED.getMessage(), 700));
                     return;
                 }
                 jedis.expire(authToken, 3600);
-            } catch (JwtException e) {
+            /*} catch (JwtException e) {
                 //有异常就是token解析失败
                 RenderUtil.renderJson(response, new ErrorTip(BizExceptionEnum.TOKEN_ERROR.getCode(), BizExceptionEnum.TOKEN_ERROR.getMessage()));
                 return;
-            }
+            }*/
         } else {
             //header没有带Bearer字段
-            RenderUtil.renderJson(response, new ErrorTip(BizExceptionEnum.TOKEN_ERROR.getCode(), BizExceptionEnum.TOKEN_ERROR.getMessage()));
+            RenderUtil.renderJson(response, new ErrorTip(BizExceptionEnum.TOKEN_ERROR.getMessage(),700));
             return;
         }
         chain.doFilter(request, response);

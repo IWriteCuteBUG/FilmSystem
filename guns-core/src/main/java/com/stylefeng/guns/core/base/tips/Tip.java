@@ -11,6 +11,9 @@ public abstract class Tip {
     protected int code;
     protected String message;
 
+
+
+
     public int getCode() {
         return code;
     }

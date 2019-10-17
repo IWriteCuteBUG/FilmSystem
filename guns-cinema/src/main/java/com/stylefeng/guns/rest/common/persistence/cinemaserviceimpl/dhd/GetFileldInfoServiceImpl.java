@@ -43,7 +43,7 @@ public class GetFileldInfoServiceImpl implements GetFieldInfoService {
         cinemaInfoVo.setImgUrl(mtimeCinemaT.getImgAddress());
 
         FiledInfoVo filedInfoVo = new FiledInfoVo();
-        filedInfoVo.setCinemaInfoVo(cinemaInfoVo);
+        filedInfoVo.setCinemaInfo(cinemaInfoVo);
 
         //hall的查询并且放入filedInfvo
         HallInfoVo hallInfoVo = new HallInfoVo();
@@ -52,7 +52,7 @@ public class GetFileldInfoServiceImpl implements GetFieldInfoService {
         hallInfoVo.setPrice(mtimeFieldT.getPrice());
         hallInfoVo.setSeatFile(mtimeHallDictT.getSeatAddress());
         hallInfoVo.setSoldSeats("1,2,3,4,5,6,7");
-        filedInfoVo.setHallInfoVo(hallInfoVo);
+        filedInfoVo.setHallInfo(hallInfoVo);
 
         //field的查询并且放入filedInfo
         MtimeHallFilmInfoT mtimeHallFilmInfoT1 = new MtimeHallFilmInfoT();
@@ -67,7 +67,7 @@ public class GetFileldInfoServiceImpl implements GetFieldInfoService {
         filmInfoVo.setFilmName(mtimeHallFilmInfoT.getFilmName());
         filmInfoVo.setFilmType(mtimeHallFilmInfoT.getFilmLanguage());
         filmInfoVo.setImgAddress(mtimeHallFilmInfoT.getImgAddress());
-        filedInfoVo.setFilmInfoVo(filmInfoVo);
+        filedInfoVo.setFilmInfo(filmInfoVo);
 
         //放入到一个json中返回
         GetFieldInfoVo getFieldInfoVo = new GetFieldInfoVo();

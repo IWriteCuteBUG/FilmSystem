@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 public class OrderInfoController {
     @Autowired
     GetUserIdUtils getUserIdUtils;
-    @Reference(interfaceClass = OrderInfoService.class)
+    @Reference(interfaceClass = OrderInfoService.class,check = false)
     OrderInfoService orderInfoService;
 
     @RequestMapping("getOrderInfo")

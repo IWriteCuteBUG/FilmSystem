@@ -1,9 +1,9 @@
 package com.stylefeng.guns.rest.common.persistence.cinemaserviceimpl.zyp;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.stylefeng.guns.rest.cinemabean.MtimeCinemaT;
 import com.stylefeng.guns.rest.common.persistence.dao.MtimeCinemaTMapper;
 import com.stylefeng.guns.rest.common.persistence.dao.MtimeFieldTMapper;
-import com.stylefeng.guns.rest.common.persistence.model.MtimeCinemaT;
 import com.stylefeng.guns.rest.common.persistence.model.MtimeFieldT;
 import com.stylefeng.guns.rest.orderservice.OrderCinemaService;
 import org.springframework.beans.factory.annotation.Autowired;

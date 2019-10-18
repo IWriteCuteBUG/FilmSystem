@@ -1,7 +1,6 @@
-package com.stylefeng.guns.rest.filmservice;
+package com.stylefeng.guns.rest.filmservice.ljw;
 
 import com.stylefeng.guns.rest.filmservice.ljw.vo.ljw.CommonVo;
-
 
 
 public interface FilmServiceLeejw {

@@ -1,10 +1,9 @@
 package com.stylefeng.guns.rest.common.persistence.dao;
 
-import com.stylefeng.guns.rest.common.persistence.model.MtimeFilmT;
+
 import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.stylefeng.guns.rest.vo.cly.clyreqvo.GetFilmCondition;
-import com.stylefeng.guns.rest.vo.cly.clyresvo.ClyFilm;
-import org.apache.ibatis.annotations.Param;
+import com.stylefeng.guns.rest.common.persistence.model.MtimeFilmT;
+
 
 import java.util.List;
 

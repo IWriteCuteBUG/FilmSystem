@@ -1,4 +1,4 @@
-package com.stylefeng.guns.rest.common.persistence.vo.ljw;
+package com.stylefeng.guns.rest.filmservice.ljw.vo.ljw;
 
 
 

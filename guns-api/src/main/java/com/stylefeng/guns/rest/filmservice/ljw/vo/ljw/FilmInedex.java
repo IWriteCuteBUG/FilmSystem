@@ -1,66 +1,72 @@
 package com.stylefeng.guns.rest.filmservice.ljw.vo.ljw;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.stylefeng.guns.rest.filmservice.ljw.vo.ljw.model.MtimeBannerT;
+
 import sun.dc.pr.PRError;
 
 import javax.validation.constraints.NotEmpty;
+import java.io.Serializable;
 import java.util.List;
 
-public class FilmInedex {
+public class FilmInedex  implements Serializable {
+    private static  final long serialVersionUID = -167347888495063L;
 
-    private Object banners;
-    private  Object boxRanking;
-    private  Object expectRanking;
-    private Object hotFilms;
-    private  Object soonFilms;
-    private  Object top100;
+    private List<BannerVo> banners;
+    private  List<FilmRank> boxRanking;
+    private  List<FilmRank> expectRanking;
+    private HotFilmsVo hotFilms;
+    private  HotFilmsVo soonFilms;
+    private  List<FilmRank> top100;
 
-    public Object getBanners() {
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public List<BannerVo> getBanners() {
         return banners;
     }
 
-    public void setBanners(Object banners) {
+    public void setBanners(List<BannerVo> banners) {
         this.banners = banners;
     }
 
-    public Object getBoxRanking() {
+    public List<FilmRank> getBoxRanking() {
         return boxRanking;
     }
 
-    public void setBoxRanking(Object boxRanking) {
+    public void setBoxRanking(List<FilmRank> boxRanking) {
         this.boxRanking = boxRanking;
     }
 
-    public Object getExpectRanking() {
+    public List<FilmRank> getExpectRanking() {
         return expectRanking;
     }
 
-    public void setExpectRanking(Object expectRanking) {
+    public void setExpectRanking(List<FilmRank> expectRanking) {
         this.expectRanking = expectRanking;
     }
 
-    public Object getHotFilms() {
+    public HotFilmsVo getHotFilms() {
         return hotFilms;
     }
 
-    public void setHotFilms(Object hotFilms) {
+    public void setHotFilms(HotFilmsVo hotFilms) {
         this.hotFilms = hotFilms;
     }
 
-    public Object getSoonFilms() {
+    public HotFilmsVo getSoonFilms() {
         return soonFilms;
     }
 
-    public void setSoonFilms(Object soonFilms) {
+    public void setSoonFilms(HotFilmsVo soonFilms) {
         this.soonFilms = soonFilms;
     }
 
-    public Object getTop100() {
+    public List<FilmRank> getTop100() {
         return top100;
     }
 
-    public void setTop100(Object top100) {
+    public void setTop100(List<FilmRank> top100) {
         this.top100 = top100;
     }
 }

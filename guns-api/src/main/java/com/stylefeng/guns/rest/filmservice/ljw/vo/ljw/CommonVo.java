@@ -1,12 +1,20 @@
 package com.stylefeng.guns.rest.filmservice.ljw.vo.ljw;
 
-public class CommonVo {
+import java.io.Serializable;
+
+public class CommonVo  implements Serializable {
+    private static  final long serialVersionUID = -1673477793495063L;
+
     private Object data;
     private  String imgPre;
     private  String msg;
     private  String nowPage;
     private  int status;
     private  String totalPage;
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
     public Object getData() {
         return data;

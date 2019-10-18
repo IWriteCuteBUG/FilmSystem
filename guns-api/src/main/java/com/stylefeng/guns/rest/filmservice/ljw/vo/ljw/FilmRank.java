@@ -1,8 +1,13 @@
 package com.stylefeng.guns.rest.filmservice.ljw.vo.ljw;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import sun.dc.pr.PRError;
 
-public class FilmRank{
+import java.io.Serializable;
+
+public class FilmRank  implements Serializable {
+    private static  final long serialVersionUID = -22273477793495063L;
+
     private  int boxNum;
     private  int expectNum;
     private   String filmCats;
@@ -10,9 +15,10 @@ public class FilmRank{
     private  String filmLength;
     private  String filmName;
     private  String filmScore;
-    private  String filmType;
+    private  int filmType;
     private  String imgAddress;
     private  String score;
+    @JsonFormat(pattern="yyyy-MM-dd")
     private  String showTime;
 
     public int getBoxNum() {
@@ -71,11 +77,15 @@ public class FilmRank{
         this.filmScore = filmScore;
     }
 
-    public String getFilmType() {
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public int getFilmType() {
         return filmType;
     }
 
-    public void setFilmType(String filmType) {
+    public void setFilmType(int filmType) {
         this.filmType = filmType;
     }
 

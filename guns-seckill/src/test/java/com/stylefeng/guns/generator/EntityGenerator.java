@@ -51,7 +51,7 @@ public class EntityGenerator {
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("123456");
-        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/guns_rest?serverTimezone=GMT&characterEncoding=utf8");
+        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/guns_seckill?serverTimezone=GMT&characterEncoding=utf8");
         mpg.setDataSource(dsc);
 
         // 策略配置
@@ -59,7 +59,10 @@ public class EntityGenerator {
         //strategy.setTablePrefix(new String[]{"_"});// 此处可以修改为您的表前缀
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
 //        strategy.setInclude(new String[]{"user"});
-        strategy.setInclude(new String[]{"mtime_actor_t"});
+        strategy.setInclude(new String[]{"mtime_promo"});
+//        strategy.setInclude(new String[]{"mtime_promo_stock"});
+//        strategy.setInclude(new String[]{"mtime_promo_order"});
+//        strategy.setInclude(new String[]{"mtime_stock_log"});
         mpg.setStrategy(strategy);
 
         // 包配置

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import redis.clients.jedis.Jedis;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -52,15 +53,15 @@ public class OrderInfoController {
     Jedis jedis;
 
     @RequestMapping("getOrderInfo")
-    public OrderInfoBaseVo orderInfo(HttpServletRequest request, OrderInfoVo orderInfoVo) throws ParseException {
-        Integer userId = getUserIdUtils.getUserId(request);
+    public OrderInfoBaseVo orderInfo(HttpServletRequest request, HttpServletResponse response, OrderInfoVo orderInfoVo) throws ParseException {
+        Integer userId = getUserIdUtils.getUserId(request,response);
 //        int userId = 1;
         OrderInfoBaseVo orderInfoBaseVo = orderInfoService.queryOrderInfoByUserId(userId, orderInfoVo);
         return orderInfoBaseVo;
     }
 
     @RequestMapping("buyTickets")
-    public BaseResVoSJB orderBuyTickets(HttpServletRequest request, OrderBuyTicketsReqVo vo) throws IOException {
+    public BaseResVoSJB orderBuyTickets(HttpServletRequest request,HttpServletResponse response, OrderBuyTicketsReqVo vo) throws IOException {
         int fieldId = vo.getFieldId();
         MtimeFieldTVo field = fieldService.queryFieldById(fieldId);
         MtimeHallDictTVo hall = hallService.queryHallById(field.getHallId());
@@ -93,7 +94,7 @@ public class OrderInfoController {
         }
 
         //生成一个用于插入数据库的order
-        Integer userId = getUserIdUtils.getUserId(request);
+        Integer userId = getUserIdUtils.getUserId(request,response);
         MoocOrderTVo order = new MoocOrderTVo();
         order.setUuid(OrderInfoController.getUUID());
         order.setCinemaId(field.getCinemaId());

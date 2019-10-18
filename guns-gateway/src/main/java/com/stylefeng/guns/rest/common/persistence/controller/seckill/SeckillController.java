@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("promo")
@@ -32,8 +33,11 @@ public class SeckillController {
     }
 
     @RequestMapping("createOrder")
-    public RespPromoBaseVo createOrder(HttpServletRequest request, ReqCreateOrderVo reqCreateOrderVo) {
-        Integer userId = getUserIdUtils.getUserId(request);
+    public RespPromoBaseVo createOrder(HttpServletRequest request, HttpServletResponse response, ReqCreateOrderVo reqCreateOrderVo) {
+        Integer userId = getUserIdUtils.getUserId(request,response);
+        if (userId == null) {
+            return RespPromoBaseVo.err();
+        }
         RespPromoBaseVo respPromoBaseVo = seckillService.createOrder(reqCreateOrderVo,userId);
         return respPromoBaseVo;
     }

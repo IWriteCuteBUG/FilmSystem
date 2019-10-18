@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import redis.clients.jedis.Jedis;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("user")
@@ -23,9 +24,9 @@ public class AuthUserController {
     private GetUserIdUtils getUserIdUtils;
 
     @RequestMapping("getUserInfo")
-    public UserBaseVo getUserInfo(HttpServletRequest request) {
+    public UserBaseVo getUserInfo(HttpServletRequest request, HttpServletResponse response) {
 //        int UUID = 2;
-        Integer userId = getUserIdUtils.getUserId(request);
+        Integer userId = getUserIdUtils.getUserId(request,response);
 
 //        String usernameFromToken = jwtTokenUtil.getUsernameFromToken(token);
         Integer integer = Integer.valueOf(userId);

@@ -20,4 +20,10 @@ public class RespPromoBaseVo implements Serializable {
         respPromoBaseVo.setData(promoVos);
         return respPromoBaseVo;
     }
+    public static RespPromoBaseVo err() {
+        RespPromoBaseVo respPromoBaseVo = new RespPromoBaseVo();
+        respPromoBaseVo.setMsg("token验证失败");
+        respPromoBaseVo.setStatus(700);
+        return respPromoBaseVo;
+    }
 }

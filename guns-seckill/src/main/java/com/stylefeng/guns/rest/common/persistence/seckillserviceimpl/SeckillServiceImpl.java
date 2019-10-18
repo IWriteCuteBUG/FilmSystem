@@ -19,8 +19,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 @Service(interfaceClass = SeckillService.class)
@@ -57,11 +60,15 @@ public class SeckillServiceImpl implements SeckillService {
             for (MtimePromo mtimePromo : mtimePromos) {
                 PromoVo promoVo = new PromoVo();
                 BeanUtils.copyProperties(mtimePromo,promoVo);
+
                 RespSeckillCinemaVo cinemaMsg = cinemaSeckillService.getCinemaMsg(mtimePromo.getCinemaId());
+
                 BeanUtils.copyProperties(cinemaMsg,promoVo);
                 MtimePromoStock mtimePromoStock = new MtimePromoStock();
                 mtimePromoStock.setPromoId(mtimePromo.getUuid());
+
                 MtimePromoStock mtimePromoStock1 = mtimePromoStockMapper.selectOne(mtimePromoStock);
+
                 Integer stock = mtimePromoStock1.getStock();
                 promoVo.setStock(stock);
                 promoVos.add(promoVo);
@@ -74,9 +81,31 @@ public class SeckillServiceImpl implements SeckillService {
     public RespPromoBaseVo createOrder(ReqCreateOrderVo reqCreateOrderVo, Integer userId) {
         Integer promoId = reqCreateOrderVo.getPromoId();
         Integer amount = reqCreateOrderVo.getAmount();
+//        更新库存
         mtimePromoStockMapper.updateByPromoId(promoId, amount);
+//        放入秒杀表中的内容
         MtimePromoOrder mtimePromoOrder = new MtimePromoOrder();
-        mtimePromoMapper.selectList
+        MtimePromo mtimePromo = new MtimePromo();
+        mtimePromo.setUuid(promoId);
+        MtimePromo mtimePromo1 = mtimePromoMapper.selectOne(mtimePromo);
+        BeanUtils.copyProperties(mtimePromo1,mtimePromoOrder);
+//        创建订单的世界
+        mtimePromoOrder.setCreateTime(new Date());
+//        userId
+        mtimePromoOrder.setUserId(userId);
+//        计算数量
+        mtimePromoOrder.setAmount(amount);
+//        计算价格
+        BigDecimal bigDecimal = new BigDecimal(amount);
+        BigDecimal price = mtimePromoOrder.getPrice().multiply(bigDecimal);
+        mtimePromoOrder.setPrice(price);
+//        exchange_code 兑换码？
+        mtimePromoOrder.setExchangeCode("EA1234567");
+//        生成订单号
+        UUID uuid = UUID.randomUUID();
+        String u1 = uuid.toString();
+        long time = new Date().getTime();
+        mtimePromoOrder.setUuid(u1+time);
         mtimePromoOrderMapper.insertByUserIdAndAmount(mtimePromoOrder);
         return RespPromoBaseVo.ok(null, "下单成功");
     }

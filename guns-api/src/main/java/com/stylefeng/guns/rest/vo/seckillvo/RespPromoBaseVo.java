@@ -14,6 +14,10 @@ public class RespPromoBaseVo implements Serializable {
     Object data;
 
     public static RespPromoBaseVo ok(List<PromoVo> promoVos) {
-        return null;
+        RespPromoBaseVo respPromoBaseVo = new RespPromoBaseVo();
+        respPromoBaseVo.setMsg("成功");
+        respPromoBaseVo.setStatus(0);
+        respPromoBaseVo.setData(promoVos);
+        return respPromoBaseVo;
     }
 }

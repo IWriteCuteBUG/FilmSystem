@@ -3,6 +3,7 @@ package com.stylefeng.guns.rest.vo.seckillvo;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
@@ -14,7 +15,7 @@ public class PromoVo implements Serializable {
     String description;
     Date endTime;
     String imgAddress;
-    Integer price;
+    BigDecimal price;
     Date startTime;
     Integer status;
     Integer stock;

@@ -3,6 +3,7 @@ package com.stylefeng.guns.rest.common.persistence.seckillserviceimpl;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.stylefeng.guns.rest.common.persistence.dao.MtimePromoMapper;
 import com.stylefeng.guns.rest.common.persistence.dao.MtimePromoStockMapper;
 import com.stylefeng.guns.rest.common.persistence.model.MtimePromo;
@@ -36,9 +37,12 @@ public class SeckillServiceImpl implements SeckillService {
 
     @Override
     public RespPromoBaseVo getPromo(ReqGetPromoVo reqGetPromoVo) {
+        Page<MtimePromo> page = new Page<>();
+        page.setSize(reqGetPromoVo.getPageSize());
+        page.setCurrent(reqGetPromoVo.getNowPage());
         EntityWrapper<MtimePromo> wrapper = new EntityWrapper<>();
 //        wrapper.eq("uuid",reqGetPromoVo.get);
-        List<MtimePromo> mtimePromos = mtimePromoMapper.selectList(wrapper);
+        List<MtimePromo> mtimePromos = mtimePromoMapper.selectPage(page,wrapper);
         List<PromoVo> promoVos = new ArrayList<>();
         if (CollectionUtils.isNotEmpty(mtimePromos)) {
             for (MtimePromo mtimePromo : mtimePromos) {

@@ -8,5 +8,8 @@
         <result column="promo_id" property="promoId" />
         <result column="stock" property="stock" />
     </resultMap>
+    <update id="updateByPromoId">
+        update mtime_promo_stock set stock = stock - #{param2} where uuid = #{param1}
+    </update>
 
 </mapper>

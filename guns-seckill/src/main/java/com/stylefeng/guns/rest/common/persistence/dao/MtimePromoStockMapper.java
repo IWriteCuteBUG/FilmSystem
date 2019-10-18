@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  */
 public interface MtimePromoStockMapper extends BaseMapper<MtimePromoStock> {
 
+    int updateByPromoId(Integer promoId,Integer amount);
 }

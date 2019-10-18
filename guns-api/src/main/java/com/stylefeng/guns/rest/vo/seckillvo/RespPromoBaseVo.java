@@ -13,9 +13,9 @@ public class RespPromoBaseVo implements Serializable {
     String msg;
     Object data;
 
-    public static RespPromoBaseVo ok(List<PromoVo> promoVos) {
+    public static RespPromoBaseVo ok(List<PromoVo> promoVos,String msg) {
         RespPromoBaseVo respPromoBaseVo = new RespPromoBaseVo();
-        respPromoBaseVo.setMsg("成功");
+        respPromoBaseVo.setMsg(msg);
         respPromoBaseVo.setStatus(0);
         respPromoBaseVo.setData(promoVos);
         return respPromoBaseVo;

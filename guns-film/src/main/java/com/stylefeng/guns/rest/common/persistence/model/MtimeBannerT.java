@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 
 /**
@@ -24,6 +26,7 @@ public class MtimeBannerT extends Model<MtimeBannerT> {
      * 主键编号
      */
     @TableId(value = "UUID", type = IdType.AUTO)
+    @JsonProperty("bannerId")
     private Integer uuid;
     /**
      * banner图存放路径

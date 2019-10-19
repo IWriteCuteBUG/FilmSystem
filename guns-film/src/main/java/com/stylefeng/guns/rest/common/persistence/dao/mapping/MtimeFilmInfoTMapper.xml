@@ -4,15 +4,54 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.stylefeng.guns.rest.common.persistence.model.MtimeFilmInfoT">
-        <id column="UUID" property="uuid" />
+    <id column="UUID" property="uuid" />
+    <result column="film_id" property="filmId" />
+    <result column="film_en_name" property="filmEnName" />
+    <result column="film_score" property="filmScore" />
+    <result column="film_score_num" property="filmScoreNum" />
+    <result column="film_length" property="filmLength" />
+    <result column="biography" property="biography" />
+    <result column="director_id" property="directorId" />
+    <result column="film_imgs" property="filmImgs" />
+</resultMap>
+
+    <resultMap id="filmRank" type="com.stylefeng.guns.rest.filmservice.ljw.vo.ljw.FilmRank">
         <result column="film_id" property="filmId" />
-        <result column="film_en_name" property="filmEnName" />
+        <result column="film_name"  property="filmName" />
         <result column="film_score" property="filmScore" />
-        <result column="film_score_num" property="filmScoreNum" />
-        <result column="film_length" property="filmLength" />
-        <result column="biography" property="biography" />
-        <result column="director_id" property="directorId" />
-        <result column="film_imgs" property="filmImgs" />
+        <result column="film_type" property="filmType" />
+        <result column="img_address" property="imgAddress" />
+        <result column="film_score" property="score"  />
+       <result column="film_time" property="showTime" />
+        <result column="film_preSaleNum" property="expectNum" />
+        <result column="film_box_office" property="boxNum" />
+
     </resultMap>
+
+    <sql id="selectFilmRank"  >
+         select film_preSaleNum,film_box_office,film_name,a.film_score,film_time,film_id,img_address,film_type from mtime_film_t a left  join  mtime_film_info_t b on  a.UUID=b.UUID
+    </sql>
+    <select id="selectBoxRanking" resultMap="filmRank">
+        <include refid="selectFilmRank" />  order  by film_box_office desc limit 10
+    </select>
+    <select id="selectExpectRanking" resultMap="filmRank">
+        <include refid="selectFilmRank" />   where film_status=1 limit 8
+    </select>
+    <select id="selectHotRanking" resultMap="filmRank">
+        <include refid="selectFilmRank" />  where film_status=1 limit 8
+    </select>
+    <select id="selectSoonRanking" resultMap="filmRank">
+        <include refid="selectFilmRank" /> where film_status=2 limit 8
+    </select>
+    <select id="selectTopRanking" resultMap="filmRank">
+        <include refid="selectFilmRank" /> order  by film_score desc limit 10
+    </select>
+    <select id="selectByName"   resultMap="filmRank">
+        <include refid="selectFilmRank" /> where name like #{name}
+    </select>
+
+
+
+
 
 </mapper>

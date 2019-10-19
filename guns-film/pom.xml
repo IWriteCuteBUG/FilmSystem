@@ -59,6 +59,21 @@
             <artifactId>zkclient</artifactId>
             <version>0.10</version>
         </dependency>
+        <!--<dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-core</artifactId>
+            <version>3.1.0</version>
+        </dependency>-->
+        <!--<dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>2.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-core</artifactId>
+            <version>2.3</version>
+        </dependency>-->
     </dependencies>
 
     <build>

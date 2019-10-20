@@ -13,17 +13,17 @@ import com.stylefeng.guns.rest.common.persistence.model.MtimePromoStock;
 import com.stylefeng.guns.rest.seckillservice.CinemaSeckillService;
 import com.stylefeng.guns.rest.seckillservice.SeckillService;
 import com.stylefeng.guns.rest.vo.seckillvo.*;
+import com.stylefeng.guns.rest.vo.zyp.MyStock;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.rocketmq.client.exception.MQClientException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import redis.clients.jedis.Jedis;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Component
 @Service(interfaceClass = SeckillService.class)
@@ -41,7 +41,7 @@ public class SeckillServiceImpl implements SeckillService {
     MtimePromoOrderMapper mtimePromoOrderMapper;
 
     @Override
-    public RespPromoBaseVo getPromo(ReqGetPromoVo reqGetPromoVo) {
+    public List<PromoVo> getPromo(ReqGetPromoVo reqGetPromoVo) {
         Page<MtimePromo> page = new Page<>();
         Integer pageSize = reqGetPromoVo.getPageSize();
         Integer nowPage = reqGetPromoVo.getNowPage();
@@ -66,30 +66,38 @@ public class SeckillServiceImpl implements SeckillService {
                 BeanUtils.copyProperties(cinemaMsg,promoVo);
                 MtimePromoStock mtimePromoStock = new MtimePromoStock();
                 mtimePromoStock.setPromoId(mtimePromo.getUuid());
-
-                MtimePromoStock mtimePromoStock1 = mtimePromoStockMapper.selectOne(mtimePromoStock);
-
-                Integer stock = mtimePromoStock1.getStock();
+//              获取库存
+                Integer stock = null;
+                if (pageSize != null && nowPage != null) {
+                    MtimePromoStock mtimePromoStock1 = mtimePromoStockMapper.selectOne(mtimePromoStock);
+                    stock = mtimePromoStock1.getStock();
+                }
                 promoVo.setStock(stock);
                 promoVos.add(promoVo);
             }
         }
-        return RespPromoBaseVo.ok(promoVos,"");
+        return promoVos;
     }
 
     @Override
-    public RespPromoBaseVo createOrder(ReqCreateOrderVo reqCreateOrderVo, Integer userId) {
-        Integer promoId = reqCreateOrderVo.getPromoId();
-        Integer amount = reqCreateOrderVo.getAmount();
+    public RespPromoBaseVo createOrder(Integer promoId,Integer amount, Integer userId) throws MQClientException {
 //        更新库存
-        mtimePromoStockMapper.updateByPromoId(promoId, amount);
+//        String s = jedis.get(promoId + "");
+////        mtimePromoStockMapper.updateByPromoId(promoId, amount);
+////        缓存更新缓存,在这里更新jedis必须序列化，是不行的
+
+//        jedis.set(promoId + "", str2Stock + "");
+//        发送异步消息更新缓存
+//        String[] args = {promoId + "", amount + ""};
+//        MqProvider.main(args);
+        MqProvider.sendMsg(promoId,amount);
 //        放入秒杀表中的内容
         MtimePromoOrder mtimePromoOrder = new MtimePromoOrder();
         MtimePromo mtimePromo = new MtimePromo();
         mtimePromo.setUuid(promoId);
         MtimePromo mtimePromo1 = mtimePromoMapper.selectOne(mtimePromo);
         BeanUtils.copyProperties(mtimePromo1,mtimePromoOrder);
-//        创建订单的世界
+//        创建订单的时间
         mtimePromoOrder.setCreateTime(new Date());
 //        userId
         mtimePromoOrder.setUserId(userId);
@@ -108,5 +116,11 @@ public class SeckillServiceImpl implements SeckillService {
         mtimePromoOrder.setUuid(u1+time);
         mtimePromoOrderMapper.insertByUserIdAndAmount(mtimePromoOrder);
         return RespPromoBaseVo.ok(null, "下单成功");
+    }
+
+    @Override
+    public List<MyStock> getStocks() {
+        List<MyStock> myStocks =  mtimePromoMapper.selectStock();
+        return myStocks;
     }
 }

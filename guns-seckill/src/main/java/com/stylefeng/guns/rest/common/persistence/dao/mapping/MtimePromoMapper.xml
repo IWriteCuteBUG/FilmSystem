@@ -12,5 +12,8 @@
         <result column="status" property="status" />
         <result column="description" property="description" />
     </resultMap>
+    <select id="selectStock" resultType="com.stylefeng.guns.rest.vo.zyp.MyStock">
+      select promo_id as promoId,stock from mtime_promo_stock
+    </select>
 
 </mapper>

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class filmControllerLjw {
-    @Reference(interfaceClass = FilmServiceLeejw.class)
+    @Reference(interfaceClass = FilmServiceLeejw.class,check = false)
     FilmServiceLeejw filmServiceLeejw;
 
     @RequestMapping("film/getIndex")

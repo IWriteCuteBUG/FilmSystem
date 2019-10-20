@@ -42,5 +42,9 @@ public class SeckillController {
         return respPromoBaseVo;
     }
 
-
+    @RequestMapping("publishPromoStock")
+    public RespPromoBaseVo publishPromoStock(Integer cinemaId) {
+//        RespPromoBaseVo respPromoBaseVo = seckillService.createOrder(reqCreateOrderVo,userId);
+        return RespPromoBaseVo.ok(null,"发布成功");
+    }
 }

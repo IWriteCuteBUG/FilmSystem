@@ -15,8 +15,8 @@
         <result column="end_time" property="endTime" />
     </resultMap>
     <insert id="insertByUserIdAndAmount">
-    insert into mtime_promo_order(user_id,cinema_id,exchange_code,amount,price,start_time,create_time,end_time)
-    values(#{order.userId},#{order.cinemaId},#{order.exchangeCode},#{order.amount},#{order.price},#{order.startTime},#{order.createTime},#{order.endTime});
+    insert into mtime_promo_order(uuid,user_id,cinema_id,exchange_code,amount,price,start_time,create_time,end_time)
+    values(#{order.uuid},#{order.userId},#{order.cinemaId},#{order.exchangeCode},#{order.amount},#{order.price},#{order.startTime},#{order.createTime},#{order.endTime});
     </insert>
 
 </mapper>

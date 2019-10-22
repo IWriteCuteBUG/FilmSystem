@@ -1,32 +1,29 @@
-package com.stylefeng.guns.rest.common.persistence.seckillserviceimpl;
+package com.stylefeng.guns.rest.modular.mq;
 
 import com.alibaba.fastjson.JSON;
-import com.stylefeng.guns.rest.common.persistence.dao.MtimePromoStockMapper;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.common.message.MessageExt;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 
-@Component
+/*@Component
 public class MqConsumer {
 //    方案1
-    @Autowired
-    private MtimePromoStockMapper mtimePromoStockMapper;
-    @Value("${mq.address}")
+    *//*@Autowired
+    private MtimePromoStockMapper mtimePromoStockMapper;*//*
+    @Value("${rq.address}")
     private String address;
-    @Value("${mq.consumerGroup}")
+    @Value("${rq.consumerGroup}")
     private String consumerGroup;
-    @Value("${mq.topic}")
+    @Value("${rq.topic}")
     private String topic;
 
     private DefaultMQPushConsumer consumer;
@@ -54,7 +51,7 @@ public class MqConsumer {
                 System.out.println("promoId = " + promoId);
                 System.out.println("amount = " + amount);
 //                 方案1
-                mtimePromoStockMapper.updateByPromoId(promoId, amount);
+//                mtimePromoStockMapper.updateByPromoId(promoId, amount);
 //                方案2
 //                int update = mtimePromoStockMapper.updateByPromoId(promoId, amount);
 //                返回一枚举类型
@@ -65,13 +62,13 @@ public class MqConsumer {
     }
 
 //    方案2
-    /*private static MtimePromoStockMapper mtimePromoStockMapper;
+   *//* private static MtimePromoStockMapper mtimePromoStockMapper;
     @Autowired
     public void setMtimePromoStockMapper(MtimePromoStockMapper MtimePromoStockMapper) {
         MqConsumer.mtimePromoStockMapper = MtimePromoStockMapper;
-    }*/
+    }*//*
 
     public void receiveMsg() throws MQClientException {
 
     }
-}
+}*/

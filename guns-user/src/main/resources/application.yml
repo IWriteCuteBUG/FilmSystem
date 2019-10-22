@@ -48,3 +48,9 @@ logging:
   level.com.stylefeng: debug
   path: logs/
   file: guns-user.log
+
+rq:
+  consumerGroup: consumer
+  producerGroup: producerA
+  address: 127.0.0.1:9876
+  topic: topicA

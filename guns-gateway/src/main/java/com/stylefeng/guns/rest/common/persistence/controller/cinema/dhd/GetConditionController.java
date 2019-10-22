@@ -14,13 +14,13 @@ public class GetConditionController  {
     GetConditionService getConditionService;
     @RequestMapping("/cinema/getCondition")
     public GetChinemasVo getChinemasVoInfo(int brandId, int hallType, int areaId){
-        GetChinemasVo getChinemasVo = null;
+        GetChinemasVo getChinemasVo = new GetChinemasVo();
         GetConditionControllerDateVo getConditionControllerDateVo = new GetConditionControllerDateVo();
         try {
             List<AreaVo> areaVos = getConditionService.queryAreaList(areaId);
             List<BrandVo> brandVos = getConditionService.brandList(brandId);
             List<HallTypeVo> hallTypeVos = getConditionService.hallList(hallType);
-            getChinemasVo = new GetChinemasVo();
+//            getChinemasVo = new GetChinemasVo();
             getConditionControllerDateVo.setAreaList(areaVos);
             getConditionControllerDateVo.setBrandList(brandVos);
             getConditionControllerDateVo.setHalltypeList(hallTypeVos);

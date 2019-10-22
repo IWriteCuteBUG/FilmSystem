@@ -8,6 +8,7 @@ import com.stylefeng.guns.rest.vo.seckillvo.ReqCreateOrderVo;
 import com.stylefeng.guns.rest.vo.seckillvo.ReqGetPromoVo;
 import com.stylefeng.guns.rest.vo.seckillvo.RespPromoBaseVo;
 import com.stylefeng.guns.rest.vo.zyp.MyStock;
+import org.apache.commons.lang.StringUtils;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,14 +33,7 @@ public class SeckillController {
     public RespPromoBaseVo getPromo(ReqGetPromoVo reqGetPromoVo) {
         List<PromoVo> promoVos = seckillService.getPromo(reqGetPromoVo);
 //        在秒杀后的刷新界面使用redis中的数据进行库存显示
-        if (reqGetPromoVo.getNowPage() != null && reqGetPromoVo.getPageSize() != null) {
-            //获取数据库中的库存
-            List<MyStock> stocks = seckillService.getStocks();
-            for (MyStock stock : stocks) {
-                //将数据库中的库存存在jedis中
-                jedis.set(stock.getPromoId(),stock.getStock());
-            }
-        }else {
+        if (reqGetPromoVo.getNowPage() == null && reqGetPromoVo.getPageSize() == null) {
             for (PromoVo promoVo : promoVos) {
                 Integer uuid = promoVo.getUuid();
                 String s = jedis.get(uuid + "");
@@ -70,14 +64,34 @@ public class SeckillController {
 //        缓存更新缓存
         str2Stock = str2Stock - amount;
         jedis.set(promoId + "", str2Stock + "");
+
+        /*if (str2Stock < 1) {
+            Integer update = mtimeStockLogMapper.updateOrderLogStatus(stockLogId, 3);
+            return null;
+        }*/
+
 //        RespPromoBaseVo respPromoBaseVo = seckillService.createOrder(reqCreateOrderVo,userId);
-        RespPromoBaseVo respPromoBaseVo = seckillService.createOrder(promoId,amount,userId);
-        return respPromoBaseVo;
+//        RespPromoBaseVo respPromoBaseVo = seckillService.createOrder(promoId,amount,userId);
+//        初始化库存流水表 状态为初始化，返回UUID
+        String stockLogId = seckillService.createStockLog(promoId,amount);
+        if (StringUtils.isBlank(stockLogId)) {
+            return RespPromoBaseVo.orderErr();
+        }
+        Boolean aBoolean = seckillService.transactionCreateOrder(promoId, amount, userId, stockLogId);
+        if (!aBoolean) {
+            return RespPromoBaseVo.orderErr();
+        }
+        return RespPromoBaseVo.ok(null, "下单成功");
     }
 
     @RequestMapping("publishPromoStock")
     public RespPromoBaseVo publishPromoStock(Integer cinemaId) {
 //        RespPromoBaseVo respPromoBaseVo = seckillService.createOrder(reqCreateOrderVo,userId);
+        List<MyStock> stocks = seckillService.getStocks();
+        for (MyStock stock : stocks) {
+            //将数据库中的库存存在jedis中
+            jedis.set(stock.getPromoId(),stock.getStock());
+        }
         return RespPromoBaseVo.ok(null,"发布成功");
     }
 }

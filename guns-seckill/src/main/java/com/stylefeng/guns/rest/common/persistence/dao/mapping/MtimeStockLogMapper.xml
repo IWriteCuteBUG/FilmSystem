@@ -9,5 +9,16 @@
         <result column="amount" property="amount" />
         <result column="status" property="status" />
     </resultMap>
+    <insert id="insertOne">
+        INSERT INTO `mtime_stock_log` ( uuid, promo_id, amount, `status`, create_time )
+        VALUES
+          ( #{mps.uuid},#{mps.promoId},#{mps.amount},#{mps.status},#{createTime} )
+    </insert>
+    <update id="updateOrderLogStatus">
+        UPDATE mtime_stock_log
+        SET `status` = #{status}
+        WHERE
+	      uuid = #{stockLogId}
+    </update>
 
 </mapper>

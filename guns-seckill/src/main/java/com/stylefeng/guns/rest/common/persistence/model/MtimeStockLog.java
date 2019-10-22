@@ -2,12 +2,15 @@ package com.stylefeng.guns.rest.common.persistence.model;
 
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.enums.IdType;
+
 import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author jeff
@@ -21,6 +24,7 @@ public class MtimeStockLog extends Model<MtimeStockLog> {
     /**
      * 主键id
      */
+    @TableId(value = "uuid",type = IdType.INPUT)
     private String uuid;
     /**
      * 秒杀活动id

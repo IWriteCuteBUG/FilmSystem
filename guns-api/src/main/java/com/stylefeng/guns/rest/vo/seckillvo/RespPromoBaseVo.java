@@ -26,4 +26,10 @@ public class RespPromoBaseVo implements Serializable {
         respPromoBaseVo.setStatus(700);
         return respPromoBaseVo;
     }
+    public static RespPromoBaseVo orderErr() {
+        RespPromoBaseVo respPromoBaseVo = new RespPromoBaseVo();
+        respPromoBaseVo.setMsg("下单失败");
+        respPromoBaseVo.setStatus(201);
+        return respPromoBaseVo;
+    }
 }

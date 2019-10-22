@@ -47,3 +47,10 @@ logging:
   level.com.stylefeng: debug
   path: logs/
   file: guns-seckill.log
+
+mq:
+  consumerGroup: consumer
+  producerGroup: producerA
+  address: 127.0.0.1:9876
+  topic: topicA
+  transactionducergroup: transactionducergroup
